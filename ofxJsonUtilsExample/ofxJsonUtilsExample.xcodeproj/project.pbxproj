@@ -41,6 +41,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		95D4006E1CF6D17500F3B562 /* json.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
+		95D4006F1CF6D17E00F3B562 /* json_compatible.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = json_compatible.h; sourceTree = "<group>"; };
 		95EBA8BC1CEDB2B00032D176 /* ofxJsonUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxJsonUtils.h; sourceTree = "<group>"; };
 		95EBA8BF1CEDB5340032D176 /* ofxJsonConvertFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxJsonConvertFunctions.h; sourceTree = "<group>"; };
 		95EBA8C41CEDBDA60032D176 /* ofxJsonParseFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxJsonParseFunctions.h; sourceTree = "<group>"; };
@@ -71,9 +73,34 @@
 			name = local_addons;
 			sourceTree = "<group>";
 		};
+		95D4006B1CF6D17500F3B562 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				95D4006C1CF6D17500F3B562 /* nlohmann_json */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		95D4006C1CF6D17500F3B562 /* nlohmann_json */ = {
+			isa = PBXGroup;
+			children = (
+				95D4006D1CF6D17500F3B562 /* src */,
+			);
+			path = nlohmann_json;
+			sourceTree = "<group>";
+		};
+		95D4006D1CF6D17500F3B562 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				95D4006E1CF6D17500F3B562 /* json.hpp */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		95EBA8BA1CEDB2B00032D176 /* ofxJsonUtils */ = {
 			isa = PBXGroup;
 			children = (
+				95D4006B1CF6D17500F3B562 /* libs */,
 				95EBA8BB1CEDB2B00032D176 /* src */,
 			);
 			name = ofxJsonUtils;
@@ -83,6 +110,7 @@
 		95EBA8BB1CEDB2B00032D176 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				95D4006F1CF6D17E00F3B562 /* json_compatible.h */,
 				95EBA8BC1CEDB2B00032D176 /* ofxJsonUtils.h */,
 				95EBA8BF1CEDB5340032D176 /* ofxJsonConvertFunctions.h */,
 				95EBA8C41CEDBDA60032D176 /* ofxJsonParseFunctions.h */,
