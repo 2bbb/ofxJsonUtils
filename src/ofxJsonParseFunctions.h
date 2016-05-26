@@ -8,6 +8,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "json_compatible.h"
 
 namespace ofx {
     namespace JsonUtils {
