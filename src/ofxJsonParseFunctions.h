@@ -80,7 +80,7 @@ namespace ofx {
         template <typename T, std::size_t size>
         void parse(const ofJson &json, std::array<T, size> &arr) {
             if(!json.is_array()) {
-                ofLogWarning("ofxJsonUtils::parse vector") << "json isn't array";
+                ofLogWarning("ofxJsonUtils::parse array") << "json isn't array";
                 return;
             }
             for(std::size_t i = 0; i < json.size(); ++i) {
