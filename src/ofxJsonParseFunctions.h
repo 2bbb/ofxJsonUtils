@@ -71,11 +71,35 @@ namespace ofx {
                 ofLogWarning("ofxJsonUtils::parse vector") << "json isn't array";
                 return;
             }
-            vec.clear();
-            for(auto j : json) {
+            vec.resize(json.size());
+            for(std::size_t i = 0; i < json.size(); ++i) {
+                parse(json[i], vec[i]);
+            }
+        }
+        
+        template <typename T, std::size_t size>
+        void parse(const ofJson &json, std::array<T, size> &arr) {
+            if(!json.is_array()) {
+                ofLogWarning("ofxJsonUtils::parse vector") << "json isn't array";
+                return;
+            }
+            for(std::size_t i = 0; i < json.size(); ++i) {
+                if(size <= i) break;
+                parse(json[i], arr[i]);
+            }
+        }
+
+        template <typename T>
+        void parse(const ofJson &json, std::map<std::string, T> &table) {
+            if(!json.is_object()) {
+                ofLogWarning("ofxJsonUtils::parse map") << "json isn't object";
+                return;
+            }
+            table.clear();
+            for(ofJson::const_iterator it = json.cbegin(); it != json.cend(); ++it) {
                 T t;
-                parse(j, t);
-                vec.push_back(std::move(t));
+                parse(it.value(), t);
+                table.emplace(it.key(), std::move(t));
             }
         }
     };

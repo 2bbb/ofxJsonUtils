@@ -87,13 +87,40 @@ namespace ofx {
                 { "a", c.a }
             };
         }
+        
         template <typename T>
         ofJson convert(const std::vector<T> &vec) {
             std::vector<ofJson> json_vec;
-            std::for_each(vec.begin(), vec.end(), [&json_vec] (const T &t) {
-                json_vec.push_back(convert(t));
-            });
+            json_vec.resize(vec.size());
+            
+            for(std::size_t i = 0; i < vec.size(); ++i) {
+                json_vec[i] = convert(vec[i]);
+            }
+            
             return json_vec;
+        }
+        
+        template <typename T, std::size_t size>
+        ofJson convert(const std::array<T, size> &arr) {
+            std::vector<ofJson> json_vec;
+            json_vec.resize(size);
+            
+            for(std::size_t i = 0; i < size; ++i) {
+                json_vec[i] = convert(arr[i]);
+            }
+            
+            return json_vec;
+        }
+
+        template <typename T>
+        ofJson convert(std::map<std::string, T> &table) {
+            std::map<std::string, ofJson> json_map;
+            
+            for(auto it = table.cbegin(); it != table.cend(); ++it) {
+                json_map.emplace(it.first, std::move(convert(it.second)));
+            }
+            
+            return json_map;
         }
     };
 };
