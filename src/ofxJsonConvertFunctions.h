@@ -100,6 +100,18 @@ namespace ofx {
             return json_vec;
         }
         
+        template <typename T>
+        ofJson convert(const std::deque<T> &vec) {
+            std::vector<ofJson> json_vec;
+            json_vec.resize(vec.size());
+            
+            for(std::size_t i = 0; i < vec.size(); ++i) {
+                json_vec[i] = convert(vec[i]);
+            }
+            
+            return json_vec;
+        }
+
         template <typename T, std::size_t size>
         ofJson convert(const std::array<T, size> &arr) {
             std::vector<ofJson> json_vec;

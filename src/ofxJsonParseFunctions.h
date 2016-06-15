@@ -77,6 +77,18 @@ namespace ofx {
             }
         }
         
+        template <typename T>
+        void parse(const ofJson &json, std::deque<T> &vec) {
+            if(!json.is_array()) {
+                ofLogWarning("ofxJsonUtils::parse deque") << "json isn't array";
+                return;
+            }
+            vec.resize(json.size());
+            for(std::size_t i = 0; i < json.size(); ++i) {
+                parse(json[i], vec[i]);
+            }
+        }
+        
         template <typename T, std::size_t size>
         void parse(const ofJson &json, std::array<T, size> &arr) {
             if(!json.is_array()) {
