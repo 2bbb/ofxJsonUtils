@@ -41,6 +41,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9505B4C61D1CA8B3001E8FC8 /* ofxJsonify.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxJsonify.h; sourceTree = "<group>"; };
 		95D4006E1CF6D17500F3B562 /* json.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
 		95D4006F1CF6D17E00F3B562 /* json_compatible.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = json_compatible.h; sourceTree = "<group>"; };
 		95EBA8BC1CEDB2B00032D176 /* ofxJsonUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxJsonUtils.h; sourceTree = "<group>"; };
@@ -114,6 +115,7 @@
 				95EBA8BC1CEDB2B00032D176 /* ofxJsonUtils.h */,
 				95EBA8BF1CEDB5340032D176 /* ofxJsonConvertFunctions.h */,
 				95EBA8C41CEDBDA60032D176 /* ofxJsonParseFunctions.h */,
+				9505B4C61D1CA8B3001E8FC8 /* ofxJsonify.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
