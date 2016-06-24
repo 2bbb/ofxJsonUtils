@@ -20,8 +20,13 @@ namespace ofx {
         template <typename Base>
         struct Jsonify {
         public:
-            void loadFromJsonFile(const std::string &path, bool isInDataDir = true) {
+            bool loadFromJsonFile(const std::string &path, bool isInDataDir = true) {
+                if(!ofFile(path).exists()) {
+                    ofLogWarning("ofxJsonUtils::loadFromJsonFile") << path << " isn't exists";
+                    return false;
+                }
                 parse(JsonUtils::loadFromFile(path, isInDataDir), *dynamic_cast<Base *>(this));
+                return true;
             }
             void loadFromJsonString(const std::string &json_str) {
                 parse(JsonUtils::parse(json_str), *dynamic_cast<Base *>(this));
