@@ -51,6 +51,10 @@ namespace ofx {
             parse(json[key], value);
             load(json, std::forward<Others>(others) ...);
         }
+        
+        inline bool ofxJsonToFile(const std::string &path, const ofJson &json, int indent = -1) {
+            return ofBufferToFile(path, json.dump(indent));
+        }
     };
 };
 

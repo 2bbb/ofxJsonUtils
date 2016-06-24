@@ -20,7 +20,6 @@ namespace ofx {
         template <typename Base>
         struct Jsonify {
         public:
-            
             void loadFromJsonFile(const std::string &path, bool isInDataDir = true) {
                 parse(JsonUtils::loadFromFile(path, isInDataDir), *dynamic_cast<Base *>(this));
             }
@@ -35,12 +34,12 @@ namespace ofx {
                 return {"warning", "toJson isn't implemented."};
             }
             
-            std::string toJsonString() const {
-                return toJson().dump();
+            inline std::string toJsonString(int indent = -1) const {
+                return toJson().dump(indent);
             }
             
-            bool writeToJsonFile(const std::string &path) const {
-                return ofBufferToFile(path, buf(toJsonString()), false);
+            inline bool writeToJsonFile(const std::string &path, int indent = -1) const {
+                return ofBufferToFile(path, toJsonString(indent)), false);
             }
         };
     }
