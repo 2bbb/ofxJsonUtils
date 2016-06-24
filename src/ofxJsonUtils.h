@@ -28,7 +28,7 @@ namespace ofx {
         
         template <typename T>
         ofJson create(const std::string &key, const T &value) {
-            ofJson json;
+            ofJson json = ofJson::object();
             json[key] = convert(value);
             return json;
         }
@@ -36,8 +36,9 @@ namespace ofx {
         template <typename T, typename ... Others>
         auto create(const std::string &key, const T &value, const Others & ... others)
         -> typename std::enable_if<2 <= sizeof...(Others) && sizeof...(Others) % 2 == 0, ofJson>::type {
-            ofJson json = create(others ...);
+            ofJson json = std::move(create(others ...));
             json[key] = convert(value);
+            return json;
         }
         
         template <typename T>
