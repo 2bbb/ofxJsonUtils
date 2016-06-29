@@ -54,7 +54,7 @@ namespace ofx {
         }
         
         inline bool ofxJsonToFile(const std::string &path, const ofJson &json, int indent = -1) {
-            return ofBufferToFile(path, json.dump(indent));
+            return ofBufferToFile(path, ofBuffer(json.dump(indent)));
         }
     };
 };
