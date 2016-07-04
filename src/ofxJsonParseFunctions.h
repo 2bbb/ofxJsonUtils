@@ -44,25 +44,46 @@ namespace ofx {
         }
         
         void parse(const ofJson &json, ofVec2f &v) {
-            v.set(json["x"], json["y"]);
+            if(json.is_object()) {
+                v.set(json["x"], json["y"]);
+            } else if(json.is_array()) {
+                v.set(json[0], json[1]);
+            }
         }
         
         void parse(const ofJson &json, ofVec3f &v) {
-            v.set(json["x"], json["y"], json["z"]);
+            if(json.is_object()) {
+                v.set(json["x"], json["y"], json["z"]);
+            } else if(json.is_array()) {
+                v.set(json[0], json[1], json[2]);
+            }
         }
         
         void parse(const ofJson &json, ofVec4f &v) {
-            v.set(json["x"], json["y"], json["z"], json["w"]);
+            if(json.is_object()) {
+                v.set(json["x"], json["y"], json["z"], json["w"]);
+            } else if(json.is_array()) {
+                v.set(json[0], json[1], json[2], json[3]);
+            }
         }
-        
+    
         void parse(const ofJson &json, ofRectangle &rect) {
-            rect.set(json["x"], json["y"], json["width"], json["height"]);
+            if(json.is_object()) {
+                rect.set(json["x"], json["y"], json["width"], json["height"]);
+            } else if(json.is_array()) {
+                rect.set(json[0], json[1], json[2], json[3]);
+            }
         }
         
         template <typename PixelType>
         void parse(const ofJson &json, ofColor_<PixelType> &c) {
-            c.set(json["r"], json["g"], json["b"]);
-            if(json.find("a") != json.end()) c.a = json["a"];
+            if(json.is_object()) {
+                c.set(json["r"], json["g"], json["b"]);
+                if(json.find("a") != json.end()) c.a = json["a"];
+            } else if(json.is_array()) {
+                c.set(json[0], json[1], json[2]);
+                if(3 < json.size()) c.a = json[3];
+            }
         }
         
         template <typename T>
