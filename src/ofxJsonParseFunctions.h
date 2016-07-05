@@ -51,7 +51,7 @@ namespace ofx {
         template <typename T>
         auto parse(const ofJson &json, T &value)
         -> typename std::enable_if<std::is_arithmetic<T>::value>::type {
-            if(!json.is_string()) return ofLogVerbose("ofxJsonUtils::parse number") << skip_json_isnt_number;
+            if(!json.is_number()) return ofLogVerbose("ofxJsonUtils::parse number") << skip_json_isnt_number;
             value = json;
         }
         
