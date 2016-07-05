@@ -43,34 +43,48 @@ namespace ofx {
             value.loadJson(json);
         }
         
+        static constexpr char const skip_invalid_format[] = "skip: invalid format.";
+        
         void parse(const ofJson &json, ofVec2f &v) {
             if(json.is_object()) {
+                auto end = json.end();
+                if(json.find("x") == end || json.find("y") == end) return ofLogVerbose("parse ofVec2f") << skip_invalid_format;
                 v.set(json["x"], json["y"]);
             } else if(json.is_array()) {
+                if(json.size() < 2) return ofLogVerbose("ofxJsonUtils::parse ofVec2f") << skip_invalid_format;
                 v.set(json[0], json[1]);
             }
         }
         
         void parse(const ofJson &json, ofVec3f &v) {
             if(json.is_object()) {
+                auto end = json.end();
+                if(json.find("x") == end || json.find("y") == end || json.find("z") == end) return ofLogVerbose("parse ofVec3f") << skip_invalid_format;
                 v.set(json["x"], json["y"], json["z"]);
             } else if(json.is_array()) {
+                if(json.size() < 3) return ofLogVerbose("ofxJsonUtils::parse ofVec3f") << skip_invalid_format;
                 v.set(json[0], json[1], json[2]);
             }
         }
         
         void parse(const ofJson &json, ofVec4f &v) {
             if(json.is_object()) {
+                auto end = json.end();
+                if(json.find("x") == end || json.find("y") == end || json.find("z") == end || json.find("w") == end) return ofLogVerbose("parse ofVec4f") << skip_invalid_format;
                 v.set(json["x"], json["y"], json["z"], json["w"]);
             } else if(json.is_array()) {
+                if(json.size() < 3) return ofLogVerbose("ofxJsonUtils::parse ofVec3f") << skip_invalid_format;
                 v.set(json[0], json[1], json[2], json[3]);
             }
         }
     
         void parse(const ofJson &json, ofRectangle &rect) {
             if(json.is_object()) {
+                auto end = json.end();
+                if(json.find("x") == end || json.find("y") == end || json.find("width") == end || json.find("height") == end) return ofLogVerbose("parse ofRectangle") << skip_invalid_format;
                 rect.set(json["x"], json["y"], json["width"], json["height"]);
             } else if(json.is_array()) {
+                if(json.size() < 4) return ofLogVerbose("ofxJsonUtils::parse ofRectangle") << skip_invalid_format;
                 rect.set(json[0], json[1], json[2], json[3]);
             }
         }
@@ -78,9 +92,12 @@ namespace ofx {
         template <typename PixelType>
         void parse(const ofJson &json, ofColor_<PixelType> &c) {
             if(json.is_object()) {
+                auto end = json.end();
+                if(json.find("r") == end || json.find("g") == end || json.find("b") == end) return ofLogVerbose("parse ofColor") << skip_invalid_format;
                 c.set(json["r"], json["g"], json["b"]);
                 if(json.find("a") != json.end()) c.a = json["a"];
             } else if(json.is_array()) {
+                if(json.size() < 3) return ofLogVerbose("ofxJsonUtils::parse ofColor") << skip_invalid_format;
                 c.set(json[0], json[1], json[2]);
                 if(3 < json.size()) c.a = json[3];
             }
@@ -89,7 +106,7 @@ namespace ofx {
         template <typename T>
         void parse(const ofJson &json, std::vector<T> &vec) {
             if(!json.is_array()) {
-                ofLogWarning("ofxJsonUtils::parse vector") << "json isn't array";
+                ofLogWarning("ofxJsonUtils::parse vector") << "skip: json isn't array";
                 return;
             }
             vec.resize(json.size());
@@ -101,7 +118,7 @@ namespace ofx {
         template <typename T>
         void parse(const ofJson &json, std::deque<T> &vec) {
             if(!json.is_array()) {
-                ofLogWarning("ofxJsonUtils::parse deque") << "json isn't array";
+                ofLogWarning("ofxJsonUtils::parse deque") << "skip: json isn't array";
                 return;
             }
             vec.resize(json.size());
@@ -113,7 +130,7 @@ namespace ofx {
         template <typename T, std::size_t size>
         void parse(const ofJson &json, std::array<T, size> &arr) {
             if(!json.is_array()) {
-                ofLogWarning("ofxJsonUtils::parse array") << "json isn't array";
+                ofLogWarning("ofxJsonUtils::parse array") << "skip: json isn't array";
                 return;
             }
             for(std::size_t i = 0; i < json.size(); ++i) {
@@ -125,7 +142,7 @@ namespace ofx {
         template <typename T>
         void parse(const ofJson &json, std::map<std::string, T> &table) {
             if(!json.is_object()) {
-                ofLogWarning("ofxJsonUtils::parse map") << "json isn't object";
+                ofLogWarning("ofxJsonUtils::parse map") << "skip: json isn't object";
                 return;
             }
             table.clear();
