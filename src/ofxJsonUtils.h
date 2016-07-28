@@ -43,13 +43,21 @@ namespace ofx {
         
         template <typename T>
         void load(const ofJson &json, const std::string &key, T &value) {
-            parse(json[key], value);
+            if(json.find(key) == json.end()) {
+                ofLogNotice("ofxJsonUtils::load") << "skip " << key << ". is null";
+            } else {
+                parse(json[key], value);
+            }
         }
 
         template <typename T, typename ... Others>
         auto load(const ofJson &json, const std::string &key, T &value, Others && ... others)
         -> typename std::enable_if<2 <= sizeof...(Others) && sizeof...(Others) % 2 == 0, void>::type {
-            parse(json[key], value);
+            if(json.find(key) == json.end()) {
+                ofLogNotice("ofxJsonUtils::load") << "skip " << key << ". is null";
+            } else {
+                parse(json[key], value);
+            }
             load(json, std::forward<Others>(others) ...);
         }
         
