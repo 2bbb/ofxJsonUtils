@@ -18,7 +18,7 @@ namespace ofx {
         }
         
         static ofJson loadFromFile(const std::string &path, bool isInDataDir = true) {
-            ofBuffer buffer = ofBufferFromFile(isInDataDir ? ofToDataPath(path, true) : path);
+            const ofBuffer buffer = ofBufferFromFile(isInDataDir ? ofToDataPath(path, true) : path);
             if(buffer.size() == 0) {
                 ofLogWarning("ofxJsonUtils") << path << " not found or empty file";
                 return ofJson();
@@ -53,8 +53,9 @@ namespace ofx {
             load(json, std::forward<Others>(others) ...);
         }
         
-        inline bool ofxJsonToFile(const std::string &path, const ofJson &json, int indent = -1) {
-            return ofBufferToFile(path, json.dump(indent));
+        inline bool ofxJsonToFile(const std::string &path, const ofJson &json, bool isInDataDir = true, int indent = -1) {
+            const std::string file_path = isInDataDir ? ofToDataPath(path, true) : path;
+            return ofBufferToFile(file_path, json.dump(indent));
         }
     };
 };

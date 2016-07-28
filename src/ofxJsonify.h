@@ -21,8 +21,9 @@ namespace ofx {
         struct Jsonify {
         public:
             bool loadFromJsonFile(const std::string &path, bool isInDataDir = true) {
-                if(!ofFile(path).exists()) {
-                    ofLogWarning("ofxJsonUtils::loadFromJsonFile") << path << " isn't exists";
+                const std::string file_path = isInDataDir ? ofToDataPath(path, true) : path;
+                if(!ofFile(file_path).exists()) {
+                    ofLogWarning("ofxJsonUtils::loadFromJsonFile") << file_path << " isn't exists";
                     return false;
                 }
                 parse(JsonUtils::loadFromFile(path, isInDataDir), *dynamic_cast<Base *>(this));
@@ -43,8 +44,9 @@ namespace ofx {
                 return toJson().dump(indent);
             }
             
-            inline bool writeToJsonFile(const std::string &path, int indent = -1) const {
-                return ofBufferToFile(path, toJsonString(indent));
+            inline bool writeToJsonFile(const std::string &path, bool isInDataDir = true, int indent = -1) const {
+                const std::string file_path = isInDataDir ? ofToDataPath(path, true) : path;
+                return ofBufferToFile(file_path, toJsonString(indent));
             }
         };
     }
