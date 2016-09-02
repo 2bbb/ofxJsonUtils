@@ -31,6 +31,10 @@ utilities for `ofJson`
 
 ### 2016/05/23 ver 0.0.1 release
 
+## Special Thanks
+
+* [TOMOTO Yusuke](https://github.com/yusuketomoto)
+
 ## License
 
 MIT License.
