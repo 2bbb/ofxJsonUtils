@@ -26,7 +26,7 @@ namespace ofx {
                 static bool const value = decltype(Test<T>(0))::value;
             };
             
-            bool has_keys(const ofJson &json, const std::vector<std::string> &keys) {
+            static bool has_keys(const ofJson &json, const std::vector<std::string> &keys) {
                 auto end = json.end();
                 bool all = true;
                 for(const auto &key : keys) {
@@ -61,7 +61,7 @@ namespace ofx {
             value.loadJson(json);
         }
         
-        void parse(const ofJson &json, ofVec2f &v) {
+        static void parse(const ofJson &json, ofVec2f &v) {
             if(json.is_object()) {
                 auto end = json.end();
                 if(!detail::has_keys(json, {"x", "y"})) return ofLogVerbose("ofxJsonUtils::parse ofVec2f") << skip_invalid_format;
@@ -74,7 +74,7 @@ namespace ofx {
             }
         }
         
-        void parse(const ofJson &json, ofVec3f &v) {
+        static void parse(const ofJson &json, ofVec3f &v) {
             if(json.is_object()) {
                 auto end = json.end();
                 if(!detail::has_keys(json, {"x", "y", "z"})) return ofLogVerbose("ofxJsonUtils::parse ofVec3f") << skip_invalid_format;
@@ -87,7 +87,7 @@ namespace ofx {
             }
         }
         
-        void parse(const ofJson &json, ofVec4f &v) {
+        static void parse(const ofJson &json, ofVec4f &v) {
             if(json.is_object()) {
                 auto end = json.end();
                 if(!detail::has_keys(json, {"x", "y", "z", "w"})) return ofLogVerbose("ofxJsonUtils::parse ofVec4f") << skip_invalid_format;
@@ -100,7 +100,7 @@ namespace ofx {
             }
         }
     
-        void parse(const ofJson &json, ofRectangle &rect) {
+        static void parse(const ofJson &json, ofRectangle &rect) {
             if(json.is_object()) {
                 auto end = json.end();
                 if(!detail::has_keys(json, {"x", "y", "width", "height"})) return ofLogVerbose("ofxJsonUtils::parse ofRectangle") << skip_invalid_format;

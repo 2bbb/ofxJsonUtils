@@ -29,7 +29,7 @@ namespace ofx {
             };
         };
         
-        const std::string &convert(const std::string &str) {
+        static const std::string &convert(const std::string &str) {
             return str;
         }
         
@@ -45,14 +45,14 @@ namespace ofx {
             return value.toJson();
         }
         
-        ofJson convert(const ofVec2f &v) {
+        static ofJson convert(const ofVec2f &v) {
             return {
                 { "x", v.x },
                 { "y", v.y }
             };
         }
         
-        ofJson convert(const ofVec3f &v) {
+        static ofJson convert(const ofVec3f &v) {
             return {
                 { "x", v.x },
                 { "y", v.y },
@@ -60,7 +60,7 @@ namespace ofx {
             };
         }
         
-        ofJson convert(const ofVec4f &v) {
+        static ofJson convert(const ofVec4f &v) {
             return {
                 { "x", v.x },
                 { "y", v.y },
@@ -69,7 +69,7 @@ namespace ofx {
             };
         }
         
-        ofJson convert(const ofRectangle &rect) {
+        static ofJson convert(const ofRectangle &rect) {
             return {
                 { "x", rect.x },
                 { "y", rect.y },
