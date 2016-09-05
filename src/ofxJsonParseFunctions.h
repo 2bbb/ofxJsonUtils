@@ -113,6 +113,23 @@ namespace ofx {
             }
         }
         
+        static void parse(const ofJson &json, ofMatrix4x4 &mat) {
+            if(json.is_object()) {
+                auto end = json.end();
+                if(!detail::has_keys(json, {"value0", "value1", "value2", "value3"})) return
+                    ofLogVerbose("ofxJsonUtils::parse ofMatrix4x4") << skip_invalid_format;
+                parse(json["value0"].get<ofJson::object_t>(), mat._mat[0]);
+                parse(json["value1"].get<ofJson::object_t>(), mat._mat[1]);
+                parse(json["value2"].get<ofJson::object_t>(), mat._mat[2]);
+                parse(json["value3"].get<ofJson::object_t>(), mat._mat[3]);
+            } else if(json.is_array()) {
+                if(json.size() < 16) return ofLogVerbose("ofxJsonUtils::parse ofMatrix4x4") << skip_invalid_format;
+                mat.set(json[0], json[1], json[2], json[3], json[4], json[5], json[6], json[7], json[8], json[9], json[10], json[11], json[12], json[13], json[14], json[15]);
+            } else {
+                ofLogVerbose("ofxJsonUtils::parse ofMatrix4x4") << skip_json_isnt_object_and_array;
+            }
+        }
+        
         template <typename PixelType>
         void parse(const ofJson &json, ofColor_<PixelType> &c) {
             if(json.is_object()) {
