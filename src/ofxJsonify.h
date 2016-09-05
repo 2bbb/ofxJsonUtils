@@ -46,7 +46,8 @@ namespace ofx {
             
             inline bool writeToJsonFile(const std::string &path, bool isInDataDir = true, int indent = -1) const {
                 const std::string file_path = isInDataDir ? ofToDataPath(path, true) : path;
-                return ofBufferToFile(file_path, toJsonString(indent));
+                ofBuffer buf(toJsonString(indent));
+                return ofBufferToFile(file_path, buf);
             }
         };
     }
