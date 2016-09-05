@@ -41,7 +41,7 @@ namespace ofx {
         static constexpr char const skip_json_isnt_number[] = "skip: json isn't number.";
         static constexpr char const skip_json_isnt_array[] = "skip: json isn't array.";
         static constexpr char const skip_json_isnt_object[] = "skip: json isn't object.";
-        static constexpr char const skip_json_isnt_object_and_array[] = "skip: json isn't object and array.";
+        static constexpr char const skip_json_isnt_object_or_array[] = "skip: json isn't object or array.";
         
         inline void parse(const ofJson &json, std::string &value) {
             if(!json.is_string()) return ofLogVerbose("ofxJsonUtils::parse string") << skip_json_isnt_string;
@@ -70,7 +70,7 @@ namespace ofx {
                 if(json.size() < 2) return ofLogVerbose("ofxJsonUtils::parse ofVec2f") << skip_invalid_format;
                 v.set(json[0], json[1]);
             } else {
-                ofLogVerbose("ofxJsonUtils::parse ofVec2f") << skip_json_isnt_object_and_array;
+                ofLogVerbose("ofxJsonUtils::parse ofVec2f") << skip_json_isnt_object_or_array;
             }
         }
         
@@ -83,7 +83,7 @@ namespace ofx {
                 if(json.size() < 3) return ofLogVerbose("ofxJsonUtils::parse ofVec3f") << skip_invalid_format;
                 v.set(json[0], json[1], json[2]);
             } else {
-                ofLogVerbose("ofxJsonUtils::parse ofVec3f") << skip_json_isnt_object_and_array;
+                ofLogVerbose("ofxJsonUtils::parse ofVec3f") << skip_json_isnt_object_or_array;
             }
         }
         
@@ -96,7 +96,7 @@ namespace ofx {
                 if(json.size() < 3) return ofLogVerbose("ofxJsonUtils::parse ofVec3f") << skip_invalid_format;
                 v.set(json[0], json[1], json[2], json[3]);
             } else {
-                ofLogVerbose("ofxJsonUtils::parse ofVec4f") << skip_json_isnt_object_and_array;
+                ofLogVerbose("ofxJsonUtils::parse ofVec4f") << skip_json_isnt_object_or_array;
             }
         }
     
@@ -109,7 +109,7 @@ namespace ofx {
                 if(json.size() < 4) return ofLogVerbose("ofxJsonUtils::parse ofRectangle") << skip_invalid_format;
                 rect.set(json[0], json[1], json[2], json[3]);
             } else {
-                ofLogVerbose("ofxJsonUtils::parse ofRectangle") << skip_json_isnt_object_and_array;
+                ofLogVerbose("ofxJsonUtils::parse ofRectangle") << skip_json_isnt_object_or_array;
             }
         }
         
@@ -126,7 +126,7 @@ namespace ofx {
                 if(json.size() < 16) return ofLogVerbose("ofxJsonUtils::parse ofMatrix4x4") << skip_invalid_format;
                 mat.set(json[0], json[1], json[2], json[3], json[4], json[5], json[6], json[7], json[8], json[9], json[10], json[11], json[12], json[13], json[14], json[15]);
             } else {
-                ofLogVerbose("ofxJsonUtils::parse ofMatrix4x4") << skip_json_isnt_object_and_array;
+                ofLogVerbose("ofxJsonUtils::parse ofMatrix4x4") << skip_json_isnt_object_or_array;
             }
         }
         
@@ -142,7 +142,7 @@ namespace ofx {
                 c.set(json[0], json[1], json[2]);
                 if(3 < json.size()) c.a = json[3];
             } else {
-                ofLogVerbose("ofxJsonUtils::parse ofColor") << skip_json_isnt_object_and_array;
+                ofLogVerbose("ofxJsonUtils::parse ofColor") << skip_json_isnt_object_or_array;
             }
         }
         
