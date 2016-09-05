@@ -78,6 +78,15 @@ namespace ofx {
             };
         }
         
+        static ofJson convert(const ofMatrix4x4 &mat) {
+            return {
+                { "value0", convert(mat._mat[0])},
+                { "value1", convert(mat._mat[1])},
+                { "value2", convert(mat._mat[2])},
+                { "value3", convert(mat._mat[3])},
+            };
+        }
+        
         template <typename PixelType>
         ofJson convert(const ofColor_<PixelType> &c) {
             return {
