@@ -26,11 +26,11 @@ namespace ofx {
                     ofLogWarning("ofxJsonUtils::loadFromJsonFile") << file_path << " isn't exists";
                     return false;
                 }
-                parse(JsonUtils::loadFromFile(path, isInDataDir), *dynamic_cast<Base *>(this));
+                parse(JsonUtils::loadFromFile(path, isInDataDir), static_cast<Base &>(*this));
                 return true;
             }
             void loadFromJsonString(const std::string &json_str) {
-                parse(JsonUtils::parse(json_str), *dynamic_cast<Base *>(this));
+                parse(JsonUtils::parse(json_str), static_cast<Base &>(*this));
             }
             
             inline operator ofJson() const { return toJson(); }
