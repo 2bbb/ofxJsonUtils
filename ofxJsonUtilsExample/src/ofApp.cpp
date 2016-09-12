@@ -43,7 +43,7 @@ struct other_custom_struct {
 // 3.1 define nested struct
 // this can use ofxJsonUtils::create, ofxJsonUtils::load
 
-struct nested_custom_struct {
+struct nested_custom_struct : ofxJsonify<nested_custom_struct> {
     ofVec2f v;
     custom_struct cs;
     other_custom_struct ocs;
@@ -52,6 +52,18 @@ struct nested_custom_struct {
     }
     void loadJson(const ofJson &json) {
         ofxJsonUtils::load(json, kv(v), kv(cs), kv(ocs));
+    }
+};
+
+// 4.1 ofxJsonify
+
+struct jsonify_test : ofxJsonify<jsonify_test> {
+    int x{8};
+    ofJson toJson() const {
+        return ofxJsonUtils::create(kv(x));
+    }
+    void loadJson(const ofJson &json) {
+        ofxJsonUtils::load(json, kv(x));
     }
 };
 
@@ -86,6 +98,16 @@ public:
             });
             p.loadJson(json);
             ofLogNotice("other_custom_struct: after load") << p.toJson().dump();
+        }
+        
+        {
+            jsonify_test jt;
+            jt.x = 26;
+            ofLogNotice("jsonify_test: jt") << jt.toJson().dump();
+            jt.writeToJsonFile("test.json");
+            jsonify_test jt2;
+            jt2.loadFromJsonFile("test.json");
+            ofLogNotice("jsonify_test: jt2") << jt2.toJsonString();
         }
         
         ofExit(0);
