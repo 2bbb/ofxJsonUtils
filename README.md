@@ -34,6 +34,7 @@ utilities for `ofJson`
 ## Special Thanks
 
 * [TOMOTO Yusuke](https://github.com/yusuketomoto)
+* [yumetodo](https://github.com/yumetodo)
 
 ## License
 
