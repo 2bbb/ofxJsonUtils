@@ -69,6 +69,7 @@ namespace ofx {
     };
 };
 
+#include "ofxJsonify.h"
 namespace ofxJsonUtils = ofx::JsonUtils;
 
 #define kv(name) #name, name
