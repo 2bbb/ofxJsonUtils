@@ -38,6 +38,7 @@ namespace ofx {
         
         static constexpr char const skip_invalid_format[] = "skip: invalid format.";
         static constexpr char const skip_json_isnt_string[] = "skip: json isn't string.";
+        static constexpr char const skip_json_isnt_boolean[] = "skip: json isn't boolean.";
         static constexpr char const skip_json_isnt_number[] = "skip: json isn't number.";
         static constexpr char const skip_json_isnt_array[] = "skip: json isn't array.";
         static constexpr char const skip_json_isnt_object[] = "skip: json isn't object.";
@@ -45,6 +46,11 @@ namespace ofx {
         
         inline void parse(const ofJson &json, std::string &value) {
             if(!json.is_string()) return ofLogVerbose("ofxJsonUtils::parse string") << skip_json_isnt_string;
+            value = json;
+        }
+        
+        inline void parse(const ofJson &json, bool &value) {
+            if(!json.is_boolean()) return ofLogVerbose("ofxJsonUtils::parse boolean") << skip_json_isnt_boolean;
             value = json;
         }
         
