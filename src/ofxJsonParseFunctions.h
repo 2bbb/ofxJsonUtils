@@ -99,7 +99,7 @@ namespace ofx {
                 if(!detail::has_keys(json, {"x", "y", "z", "w"})) return ofLogVerbose("ofxJsonUtils::parse ofVec4f") << skip_invalid_format;
                 v.set(json["x"], json["y"], json["z"], json["w"]);
             } else if(json.is_array()) {
-                if(json.size() < 3) return ofLogVerbose("ofxJsonUtils::parse ofVec3f") << skip_invalid_format;
+                if(json.size() < 4) return ofLogVerbose("ofxJsonUtils::parse ofVec4f") << skip_invalid_format;
                 v.set(json[0], json[1], json[2], json[3]);
             } else {
                 ofLogVerbose("ofxJsonUtils::parse ofVec4f") << skip_json_isnt_object_or_array;
