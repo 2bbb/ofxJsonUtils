@@ -152,8 +152,15 @@ namespace ofx {
             }
         }
         
-        template <typename T>
-        void parse(const ofJson &json, std::vector<T> &vec) {
+        template <typename T, typename Alloc>
+        void parse(const ofJson &json, std::deque<T, Alloc> &vec);
+        template <typename T, std::size_t size>
+        void parse(const ofJson &json, std::array<T, size> &arr);
+        template <typename T, typename Comp, typename Alloc>
+        void parse(const ofJson &json, std::map<std::string, T, Comp, Alloc> &table);
+
+        template <typename T, typename Alloc>
+        void parse(const ofJson &json, std::vector<T, Alloc> &vec) {
             if(!json.is_array()) {
                 return ofLogVerbose("ofxJsonUtils::parse vector") << skip_json_isnt_array;
             }
@@ -163,8 +170,8 @@ namespace ofx {
             }
         }
         
-        template <typename T>
-        void parse(const ofJson &json, std::deque<T> &vec) {
+        template <typename T, typename Alloc>
+        void parse(const ofJson &json, std::deque<T, Alloc> &vec) {
             if(!json.is_array()) {
                 return ofLogVerbose("ofxJsonUtils::parse deque") << skip_json_isnt_array;
             }
@@ -185,8 +192,8 @@ namespace ofx {
             }
         }
 
-        template <typename T>
-        void parse(const ofJson &json, std::map<std::string, T> &table) {
+        template <typename T, typename Comp, typename Alloc>
+        void parse(const ofJson &json, std::map<std::string, T, Comp, Alloc> &table) {
             if(!json.is_object()) {
                 return ofLogVerbose("ofxJsonUtils::parse map") << skip_json_isnt_object;
             }

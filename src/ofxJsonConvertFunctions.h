@@ -97,8 +97,15 @@ namespace ofx {
             };
         }
         
-        template <typename T>
-        ofJson convert(const std::vector<T> &vec) {
+        template <typename T, typename Alloc>
+        ofJson convert(const std::deque<T, Alloc> &vec);
+        template <typename T, std::size_t size>
+        ofJson convert(const std::array<T, size> &arr);
+        template <typename T, typename Comp, typename Alloc>
+        ofJson convert(std::map<std::string, T> &table);
+        
+        template <typename T, typename Alloc>
+        ofJson convert(const std::vector<T, Alloc> &vec) {
             std::vector<ofJson> json_vec;
             json_vec.resize(vec.size());
             
@@ -109,8 +116,8 @@ namespace ofx {
             return json_vec;
         }
         
-        template <typename T>
-        ofJson convert(const std::deque<T> &vec) {
+        template <typename T, typename Alloc>
+        ofJson convert(const std::deque<T, Alloc> &vec) {
             std::vector<ofJson> json_vec;
             json_vec.resize(vec.size());
             
@@ -133,7 +140,7 @@ namespace ofx {
             return json_vec;
         }
 
-        template <typename T>
+        template <typename T, typename Comp, typename Alloc>
         ofJson convert(std::map<std::string, T> &table) {
             std::map<std::string, ofJson> json_map;
             
