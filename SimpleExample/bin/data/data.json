@@ -1,0 +1,8 @@
+{
+	"foo": 1,
+	"bar": [2, 3, 4],
+	"baz": {
+		"fuga": 5.6,
+		"piyo": "piyopiyo"
+	}
+}
