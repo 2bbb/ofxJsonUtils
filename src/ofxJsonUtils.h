@@ -60,12 +60,17 @@ namespace ofx {
             }
             load(json, std::forward<Others>(others) ...);
         }
-        
-        inline bool ofxJsonToFile(const std::string &path, const ofJson &json, bool isInDataDir = true, int indent = -1) {
+
+        inline bool writeToFile(const std::string &path, const ofJson &json, bool isInDataDir = true, int indent = -1) {
             const std::string file_path = isInDataDir ? ofToDataPath(path, true) : path;
             ofBuffer buf;
             buf.append(json.dump(indent));
             return ofBufferToFile(path, buf);
+        }
+        
+        OF_DEPRECATED_MSG("ofxJsonUtils::ofxJsonToFile() is deprecated, use ofxJsonUtils::writeToFile() instead.", inline bool ofxJsonToFile(const std::string &path, const ofJson &json, bool isInDataDir = true, int indent = -1))
+        {
+            return writeToFile(path, json, isInDataDir, indent);
         }
     };
 };
