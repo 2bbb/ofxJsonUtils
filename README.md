@@ -29,6 +29,12 @@ utilities for `ofJson`
 
 ## Update history
 
+### 2017/03/05 ver 0.0.3 release
+
+* tiny bugfixes.
+
+### 2016/09/12 ver 0.0.2 release
+
 ### 2016/05/23 ver 0.0.1 release
 
 ## Special Thanks
