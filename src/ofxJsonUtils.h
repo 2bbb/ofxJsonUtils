@@ -26,6 +26,19 @@ namespace ofx {
             return ofJson::parse(buffer.getText());
         }
         
+        static inline std::vector<ofJson> loadNDJsonFromFile(const std::string &path, bool isInDataDir = true) {
+            ofBuffer buffer = ofBufferFromFile(isInDataDir ? ofToDataPath(path, true) : path);
+            std::vector<ofJson> jsons;
+            if(buffer.size() == 0) {
+                ofLogWarning("ofxJsonUtils") << path << " not found or empty file";
+                return jsons;
+            }
+            for(const auto &line : buffer.getLines()) {
+                jsons.emplace_back(std::move(ofJson::parse(line)));
+            }
+            return jsons;
+        }
+        
         template <typename T>
         static inline ofJson create(const std::string &key, const T &value) {
             ofJson json = ofJson::object();
@@ -65,6 +78,16 @@ namespace ofx {
             const std::string file_path = isInDataDir ? ofToDataPath(path, true) : path;
             ofBuffer buf;
             buf.append(json.dump(indent));
+            return ofBufferToFile(path, buf);
+        }
+        
+        static inline bool writeToNDJsonFile(const std::string &path, const std::vector<ofJson> &jsons, bool isInDataDir = true, int indent = -1) {
+            const std::string file_path = isInDataDir ? ofToDataPath(path, true) : path;
+            ofBuffer buf;
+            for(const auto &json : jsons) {
+                buf.append(json.dump(indent));
+                buf.append("\n");
+            }
             return ofBufferToFile(path, buf);
         }
         

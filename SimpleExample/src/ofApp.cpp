@@ -33,6 +33,7 @@ class ofApp : public ofBaseApp {
         ofJson json2 = ofxJsonUtils::create(kv(v), kv(w), kv(c), kv(xs));
         ofxJsonUtils::writeToFile("save_data2.json", json2);
     }
+    
 public:
     void setup() {
         loadExample();
