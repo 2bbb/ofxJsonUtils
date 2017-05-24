@@ -29,35 +29,35 @@ namespace ofx {
             };
         };
         
-        static const std::string &convert(const std::string &str) {
+        static inline const std::string &convert(const std::string &str) {
             return str;
         }
         
         template <typename T>
-        auto convert(T value)
+        static inline auto convert(T value)
         -> typename std::enable_if<std::is_arithmetic<T>::value, T>::type {
             return value;
         }
         
         template <typename T>
-        auto convert(T &value)
+        static inline auto convert(T &value)
         -> typename std::enable_if<JsonUtils::detail::has_toJson<T>::value, ofJson>::type {
             return value.toJson();
         }
         
         template <typename T>
-        ofJson convert(std::shared_ptr<T> &ptr) {
+        ofJson inline convert(std::shared_ptr<T> &ptr) {
             return ptr ? ptr->toJson() : ofJson();
         }
         
-        static ofJson convert(const ofVec2f &v) {
+        static inline ofJson convert(const ofVec2f &v) {
             return {
                 { "x", v.x },
                 { "y", v.y }
             };
         }
         
-        static ofJson convert(const ofVec3f &v) {
+        static inline ofJson convert(const ofVec3f &v) {
             return {
                 { "x", v.x },
                 { "y", v.y },
@@ -65,7 +65,7 @@ namespace ofx {
             };
         }
         
-        static ofJson convert(const ofVec4f &v) {
+        static inline ofJson convert(const ofVec4f &v) {
             return {
                 { "x", v.x },
                 { "y", v.y },
@@ -74,7 +74,7 @@ namespace ofx {
             };
         }
         
-        static ofJson convert(const ofRectangle &rect) {
+        static inline ofJson convert(const ofRectangle &rect) {
             return {
                 { "x", rect.x },
                 { "y", rect.y },
@@ -83,7 +83,7 @@ namespace ofx {
             };
         }
         
-        static ofJson convert(const ofMatrix4x4 &mat) {
+        static inline ofJson convert(const ofMatrix4x4 &mat) {
             return {
                 { "value0", convert(mat._mat[0])},
                 { "value1", convert(mat._mat[1])},
@@ -93,7 +93,7 @@ namespace ofx {
         }
         
         template <typename PixelType>
-        ofJson convert(const ofColor_<PixelType> &c) {
+        static inline ofJson convert(const ofColor_<PixelType> &c) {
             return {
                 { "r", c.r },
                 { "g", c.g },
@@ -103,14 +103,14 @@ namespace ofx {
         }
         
         template <typename T, typename Alloc>
-        ofJson convert(const std::deque<T, Alloc> &vec);
+        static inline ofJson convert(const std::deque<T, Alloc> &vec);
         template <typename T, std::size_t size>
-        ofJson convert(const std::array<T, size> &arr);
+        static inline ofJson convert(const std::array<T, size> &arr);
         template <typename T, typename Comp, typename Alloc>
-        ofJson convert(std::map<std::string, T> &table);
+        static inline ofJson convert(std::map<std::string, T> &table);
         
         template <typename T, typename Alloc>
-        ofJson convert(const std::vector<T, Alloc> &vec) {
+        static inline ofJson convert(const std::vector<T, Alloc> &vec) {
             std::vector<ofJson> json_vec;
             json_vec.resize(vec.size());
             
@@ -122,7 +122,7 @@ namespace ofx {
         }
         
         template <typename T, typename Alloc>
-        ofJson convert(const std::deque<T, Alloc> &vec) {
+        static inline ofJson convert(const std::deque<T, Alloc> &vec) {
             std::vector<ofJson> json_vec;
             json_vec.resize(vec.size());
             
@@ -134,7 +134,7 @@ namespace ofx {
         }
 
         template <typename T, std::size_t size>
-        ofJson convert(const std::array<T, size> &arr) {
+        static inline ofJson convert(const std::array<T, size> &arr) {
             std::vector<ofJson> json_vec;
             json_vec.resize(size);
             
@@ -146,7 +146,7 @@ namespace ofx {
         }
 
         template <typename T, typename Comp, typename Alloc>
-        ofJson convert(std::map<std::string, T> &table) {
+        static inline ofJson convert(std::map<std::string, T> &table) {
             std::map<std::string, ofJson> json_map;
             
             for(auto it = table.cbegin(); it != table.cend(); ++it) {
