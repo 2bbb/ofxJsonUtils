@@ -7,9 +7,6 @@
 
 #pragma once
 
-#ifndef NLOHMANN_JSON_HPP
 #include "json.hpp"
 
 using ofJson = nlohmann::json;
-
-#endif

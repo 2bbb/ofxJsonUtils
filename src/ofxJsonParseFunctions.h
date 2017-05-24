@@ -9,9 +9,13 @@
 
 #include "ofMain.h"
 #include "json_compatible.h"
+#include "bbb_json_utils/src/json_utils/parse.hpp"
 
 namespace ofx {
     namespace JsonUtils {
+        using namespace bbb::json_utils;
+        using bbb::json_utils::parse;
+        
         namespace detail {
             template <typename T>
             class has_loadJson {
@@ -36,47 +40,10 @@ namespace ofx {
             }
         };
         
-        static constexpr char const skip_invalid_format[] = "skip: invalid format.";
-        static constexpr char const skip_json_isnt_string[] = "skip: json isn't string.";
-        static constexpr char const skip_json_isnt_boolean[] = "skip: json isn't boolean.";
-        static constexpr char const skip_json_isnt_number[] = "skip: json isn't number.";
-        static constexpr char const skip_json_isnt_array[] = "skip: json isn't array.";
-        static constexpr char const skip_json_isnt_object[] = "skip: json isn't object.";
-        static constexpr char const skip_json_isnt_object_or_array[] = "skip: json isn't object or array.";
-        
-        static inline void parse(const ofJson &json, std::string &value) {
-            if(!json.is_string()) {
-                ofLogVerbose("ofxJsonUtils::parse string") << skip_json_isnt_string;
-                return;
-            }
-            value = json;
-        }
-        
-        static inline void parse(const ofJson &json, bool &value) {
-            if(!json.is_boolean()) {
-                ofLogVerbose("ofxJsonUtils::parse boolean") << skip_json_isnt_boolean;
-                return;
-            }
-            value = json;
-        }
-        
-        template <typename T>
-        static inline auto parse(const ofJson &json, T &value)
-        -> typename std::enable_if<std::is_arithmetic<T>::value>::type {
-            if(!json.is_number()) return ofLogVerbose("ofxJsonUtils::parse number") << skip_json_isnt_number;
-            value = json;
-        }
-        
         template <typename T>
         static inline auto parse(const ofJson &json, T &value)
         -> typename std::enable_if<JsonUtils::detail::has_loadJson<T>::value>::type {
             value.loadJson(json);
-        }
-        
-        template <typename T>
-        static inline void parse(const ofJson &json, std::shared_ptr<T> &ptr) {
-            ptr = std::shared_ptr<T>(new T());
-            parse(json, *(ptr.get()));
         }
         
         static inline void parse(const ofJson &json, ofVec2f &v) {
@@ -190,59 +157,6 @@ namespace ofx {
                 if(3 < json.size()) c.a = json[3];
             } else {
                 ofLogVerbose("ofxJsonUtils::parse ofColor") << skip_json_isnt_object_or_array;
-            }
-        }
-        
-        template <typename T, typename Alloc>
-        static inline void parse(const ofJson &json, std::deque<T, Alloc> &vec);
-        template <typename T, std::size_t size>
-        static inline void parse(const ofJson &json, std::array<T, size> &arr);
-        template <typename T, typename Comp, typename Alloc>
-        static inline void parse(const ofJson &json, std::map<std::string, T, Comp, Alloc> &table);
-
-        template <typename T, typename Alloc>
-        static inline void parse(const ofJson &json, std::vector<T, Alloc> &vec) {
-            if(!json.is_array()) {
-                return ofLogVerbose("ofxJsonUtils::parse vector") << skip_json_isnt_array;
-            }
-            vec.resize(json.size());
-            for(std::size_t i = 0; i < json.size(); ++i) {
-                parse(json[i], vec[i]);
-            }
-        }
-        
-        template <typename T, typename Alloc>
-        static inline void parse(const ofJson &json, std::deque<T, Alloc> &vec) {
-            if(!json.is_array()) {
-                return ofLogVerbose("ofxJsonUtils::parse deque") << skip_json_isnt_array;
-            }
-            vec.resize(json.size());
-            for(std::size_t i = 0; i < json.size(); ++i) {
-                parse(json[i], vec[i]);
-            }
-        }
-        
-        template <typename T, std::size_t size>
-        static inline void parse(const ofJson &json, std::array<T, size> &arr) {
-            if(!json.is_array()) {
-                return ofLogVerbose("ofxJsonUtils::parse array") << skip_json_isnt_array;
-            }
-            for(std::size_t i = 0; i < json.size(); ++i) {
-                if(size <= i) break;
-                parse(json[i], arr[i]);
-            }
-        }
-
-        template <typename T, typename Comp, typename Alloc>
-        static inline void parse(const ofJson &json, std::map<std::string, T, Comp, Alloc> &table) {
-            if(!json.is_object()) {
-                return ofLogVerbose("ofxJsonUtils::parse map") << skip_json_isnt_object;
-            }
-            table.clear();
-            for(ofJson::const_iterator it = json.cbegin(); it != json.cend(); ++it) {
-                T t;
-                parse(it.value(), t);
-                table.emplace(it.key(), std::move(t));
             }
         }
     };
