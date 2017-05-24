@@ -46,8 +46,8 @@ namespace ofx {
         }
         
         template <typename T>
-        ofJson inline convert(std::shared_ptr<T> &ptr) {
-            return ptr ? ptr->toJson() : ofJson();
+        ofJson inline convert(std::shared_ptr<T> ptr) {
+            return ptr ? convert(*ptr) : ofJson();
         }
         
         static inline ofJson convert(const ofVec2f &v) {
