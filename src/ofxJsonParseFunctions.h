@@ -63,7 +63,10 @@ namespace ofx {
         template <typename T>
         static inline auto parse(const ofJson &json, T &value)
         -> typename std::enable_if<std::is_arithmetic<T>::value>::type {
-            if(!json.is_number()) return ofLogVerbose("ofxJsonUtils::parse number") << skip_json_isnt_number;
+            if(!json.is_number()) {
+                ofLogVerbose("ofxJsonUtils::parse number") << skip_json_isnt_number;
+                return;
+            }
             value = json;
         }
         
@@ -203,7 +206,8 @@ namespace ofx {
         template <typename T, typename Alloc>
         static inline void parse(const ofJson &json, std::vector<T, Alloc> &vec) {
             if(!json.is_array()) {
-                return ofLogVerbose("ofxJsonUtils::parse vector") << skip_json_isnt_array;
+                ofLogVerbose("ofxJsonUtils::parse vector") << skip_json_isnt_array;
+                return;
             }
             vec.resize(json.size());
             for(std::size_t i = 0; i < json.size(); ++i) {
@@ -214,7 +218,8 @@ namespace ofx {
         template <typename T, typename Alloc>
         static inline void parse(const ofJson &json, std::deque<T, Alloc> &vec) {
             if(!json.is_array()) {
-                return ofLogVerbose("ofxJsonUtils::parse deque") << skip_json_isnt_array;
+                ofLogVerbose("ofxJsonUtils::parse deque") << skip_json_isnt_array;
+                return;
             }
             vec.resize(json.size());
             for(std::size_t i = 0; i < json.size(); ++i) {
@@ -225,7 +230,8 @@ namespace ofx {
         template <typename T, std::size_t size>
         static inline void parse(const ofJson &json, std::array<T, size> &arr) {
             if(!json.is_array()) {
-                return ofLogVerbose("ofxJsonUtils::parse array") << skip_json_isnt_array;
+                ofLogVerbose("ofxJsonUtils::parse array") << skip_json_isnt_array;
+                return;
             }
             for(std::size_t i = 0; i < json.size(); ++i) {
                 if(size <= i) break;
@@ -236,7 +242,8 @@ namespace ofx {
         template <typename T, typename Comp, typename Alloc>
         static inline void parse(const ofJson &json, std::map<std::string, T, Comp, Alloc> &table) {
             if(!json.is_object()) {
-                return ofLogVerbose("ofxJsonUtils::parse map") << skip_json_isnt_object;
+                ofLogVerbose("ofxJsonUtils::parse map") << skip_json_isnt_object;
+                return;
             }
             table.clear();
             for(ofJson::const_iterator it = json.cbegin(); it != json.cend(); ++it) {
