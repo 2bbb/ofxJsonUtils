@@ -20,7 +20,7 @@ namespace ofx {
                 template <typename C>
                 static std::true_type Test(really_has<ofJson (C::*)() const, &C::toJson> *);
                 template <typename C>
-                static std::true_type Test(really_has <ofJson (C::*)(), &C::toJson> *);
+                static std::true_type Test(really_has<ofJson (C::*)(), &C::toJson> *);
                 template <typename>
                 static std::false_type Test(...);
                 
@@ -41,7 +41,7 @@ namespace ofx {
         
         template <typename T>
         auto convert(T &value)
-        -> typename std::enable_if<detail::has_toJson<T>::value, ofJson>::type {
+        -> typename std::enable_if<JsonUtils::detail::has_toJson<T>::value, ofJson>::type {
             return value.toJson();
         }
         
