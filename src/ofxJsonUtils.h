@@ -34,6 +34,7 @@ namespace ofx {
                 return jsons;
             }
             for(const auto &line : buffer.getLines()) {
+                if(line.empty()) continue;
                 jsons.emplace_back(std::move(ofJson::parse(line)));
             }
             return jsons;
