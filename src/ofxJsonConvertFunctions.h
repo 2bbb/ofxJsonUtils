@@ -45,6 +45,11 @@ namespace ofx {
             return value.toJson();
         }
         
+        template <typename T>
+        ofJson convert(std::shared_ptr<T> &ptr) {
+            return ptr ? ptr->toJson() : ofJson();
+        }
+        
         static ofJson convert(const ofVec2f &v) {
             return {
                 { "x", v.x },

@@ -67,6 +67,12 @@ namespace ofx {
             value.loadJson(json);
         }
         
+        template <typename T>
+        void parse(const ofJson &json, std::shared_ptr<T> &ptr) {
+            ptr = std::shared_ptr<T>(new T());
+            parse(json, *(ptr.get()));
+        }
+        
         static void parse(const ofJson &json, ofVec2f &v) {
             if(json.is_object()) {
                 auto end = json.end();
