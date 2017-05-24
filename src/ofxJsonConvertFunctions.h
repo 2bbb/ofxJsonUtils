@@ -107,7 +107,7 @@ namespace ofx {
         template <typename T, std::size_t size>
         static inline ofJson convert(const std::array<T, size> &arr);
         template <typename T, typename Comp, typename Alloc>
-        static inline ofJson convert(std::map<std::string, T> &table);
+        static inline ofJson convert(std::map<std::string, T, Comp, Alloc> &table);
         
         template <typename T, typename Alloc>
         static inline ofJson convert(const std::vector<T, Alloc> &vec) {
@@ -146,7 +146,7 @@ namespace ofx {
         }
 
         template <typename T, typename Comp, typename Alloc>
-        static inline ofJson convert(std::map<std::string, T> &table) {
+        static inline ofJson convert(std::map<std::string, T, Comp, Alloc> &table) {
             std::map<std::string, ofJson> json_map;
             
             for(auto it = table.cbegin(); it != table.cend(); ++it) {
