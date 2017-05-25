@@ -1,5 +1,5 @@
 //
-//  convert.hpp
+//  bbb/json/convert.hpp
 //
 //  Created by ISHII 2bit on 2017/05/24.
 //
@@ -8,7 +8,7 @@
 #ifndef bbb_json_utils_convert_hpp
 #define bbb_json_utils_convert_hpp
 
-#include "common.hpp"
+#include "./common.hpp"
 
 namespace bbb {
     namespace json_utils {

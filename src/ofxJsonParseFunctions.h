@@ -9,7 +9,7 @@
 
 #include "ofMain.h"
 #include "json_compatible.h"
-#include "bbb_json_utils/src/json_utils/parse.hpp"
+#include "../libs/bbb/json/utils/parse.hpp"
 
 namespace ofx {
     namespace JsonUtils {
