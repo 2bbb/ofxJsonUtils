@@ -10,7 +10,7 @@
 #include "ofMain.h"
 #include "ofxJsonConvertFunctions.h"
 #include "ofxJsonParseFunctions.h"
-#include "../../../libs/bbb_json_utils/src/json_utils/utils.hpp"
+#include "../libs/bbb/json.hpp"
 
 namespace ofx {
     namespace JsonUtils {

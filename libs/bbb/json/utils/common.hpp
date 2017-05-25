@@ -1,5 +1,5 @@
 //
-//  common.hpp
+//  bbb/json/common.hpp
 //
 //  Created by ISHII 2bit on 2017/05/24.
 //
@@ -15,7 +15,7 @@
 #include <memory>
 #include <type_traits>
 
-#include "../../../nlohmann_json/src/json.hpp"
+#include "../libs/nlohmann_json/src/json.hpp"
 
 namespace bbb {
     using json = nlohmann::json;

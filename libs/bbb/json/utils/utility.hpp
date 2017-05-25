@@ -1,15 +1,16 @@
 //
-//  utils.hpp
+//  bbb/json/utils/utility.hpp
 //
 //  Created by ISHII 2bit on 2017/05/24.
 //
 //
 
-#ifndef bbb_json_utils_utils_hpp
-#define bbb_json_utils_utils_hpp
+#ifndef bbb_json_utils_utility_hpp
+#define bbb_json_utils_utility_hpp
+
+#include <sstream>
 
 #include "./common.hpp"
-#include <sstream>
 
 namespace bbb {
     namespace json_utils {
@@ -68,4 +69,4 @@ namespace bbb {
     };
 };
 
-#endif /* bbb_json_utils_utils_hpp */
+#endif /* bbb_json_utils_utility_hpp */

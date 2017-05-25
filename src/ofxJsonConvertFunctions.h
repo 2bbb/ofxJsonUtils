@@ -9,11 +9,12 @@
 
 #include "ofMain.h"
 #include "json_compatible.h"
-#include "bbb_json_utils/src/json_utils/convert.hpp"
+#include "../libs/bbb/json/utils/convert.hpp"
 
 namespace ofx {
     namespace JsonUtils {
         using bbb::json_utils::convert;
+        
         namespace detail {
             template <typename T>
             class has_toJson {
