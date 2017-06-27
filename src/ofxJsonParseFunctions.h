@@ -9,13 +9,10 @@
 
 #include "ofMain.h"
 #include "json_compatible.h"
-#include "../libs/bbb/json/utils/parse.hpp"
+#include "../libs/bbb/json/utils/constants.hpp"
 
-namespace ofx {
-    namespace JsonUtils {
-        using namespace bbb::json_utils;
-        using bbb::json_utils::parse;
-        
+namespace bbb {
+    namespace json_utils {
         namespace detail {
             template <typename T>
             class has_loadJson {
@@ -27,7 +24,7 @@ namespace ofx {
                 static std::false_type Test(...);
                 
             public:
-                static bool const value = decltype(Test<T>(0))::value;
+                static constexpr bool value = decltype(Test<T>(nullptr))::value;
             };
             
             static bool has_keys(const ofJson &json, const std::vector<std::string> &keys) {
@@ -42,14 +39,14 @@ namespace ofx {
         
         template <typename T>
         static inline auto parse(const ofJson &json, T &value)
-        -> typename std::enable_if<JsonUtils::detail::has_loadJson<T>::value>::type {
+        -> typename std::enable_if<json_utils::detail::has_loadJson<T>::value>::type {
             value.loadJson(json);
         }
         
         static inline void parse(const ofJson &json, ofVec2f &v) {
             if(json.is_object()) {
                 auto end = json.end();
-                if(!JsonUtils::detail::has_keys(json, {"x", "y"})) {
+                if(!json_utils::detail::has_keys(json, {"x", "y"})) {
                     ofLogVerbose("ofxJsonUtils::parse ofVec2f") << skip_invalid_format;
                     return;
                 }
@@ -68,7 +65,7 @@ namespace ofx {
         static inline void parse(const ofJson &json, ofVec3f &v) {
             if(json.is_object()) {
                 auto end = json.end();
-                if(!JsonUtils::detail::has_keys(json, {"x", "y", "z"})) {
+                if(!json_utils::detail::has_keys(json, {"x", "y", "z"})) {
                     ofLogVerbose("ofxJsonUtils::parse ofVec3f") << skip_invalid_format;
                     return;
                 }
@@ -87,7 +84,7 @@ namespace ofx {
         static inline void parse(const ofJson &json, ofVec4f &v) {
             if(json.is_object()) {
                 auto end = json.end();
-                if(!JsonUtils::detail::has_keys(json, {"x", "y", "z", "w"})) {
+                if(!json_utils::detail::has_keys(json, {"x", "y", "z", "w"})) {
                     ofLogVerbose("ofxJsonUtils::parse ofVec4f") << skip_invalid_format;
                     return;
                 }
@@ -106,7 +103,7 @@ namespace ofx {
         static inline void parse(const ofJson &json, ofRectangle &rect) {
             if(json.is_object()) {
                 auto end = json.end();
-                if(!JsonUtils::detail::has_keys(json, {"x", "y", "width", "height"})) {
+                if(!json_utils::detail::has_keys(json, {"x", "y", "width", "height"})) {
                     ofLogVerbose("ofxJsonUtils::parse ofRectangle") << skip_invalid_format;
                     return;
                 }
@@ -125,7 +122,7 @@ namespace ofx {
         static inline void parse(const ofJson &json, ofMatrix4x4 &mat) {
             if(json.is_object()) {
                 auto end = json.end();
-                if(!JsonUtils::detail::has_keys(json, {"value0", "value1", "value2", "value3"})) {
+                if(!json_utils::detail::has_keys(json, {"value0", "value1", "value2", "value3"})) {
                     ofLogVerbose("ofxJsonUtils::parse ofMatrix4x4") << skip_invalid_format;
                     return;
                 }
@@ -148,7 +145,7 @@ namespace ofx {
         static inline void parse(const ofJson &json, ofColor_<PixelType> &c) {
             if(json.is_object()) {
                 auto end = json.end();
-                if(!JsonUtils::detail::has_keys(json, {"r", "g", "b"})) return ofLogVerbose("ofxJsonUtils::parse ofColor") << skip_invalid_format;
+                if(!json_utils::detail::has_keys(json, {"r", "g", "b"})) return ofLogVerbose("ofxJsonUtils::parse ofColor") << skip_invalid_format;
                 c.set(json["r"], json["g"], json["b"]);
                 if(json.find("a") != json.end()) c.a = json["a"];
             } else if(json.is_array()) {
@@ -161,3 +158,9 @@ namespace ofx {
         }
     };
 };
+
+namespace ofx {
+    namespace JsonUtils = bbb::json_utils;
+};
+
+#include "../libs/bbb/json/utils/parse.hpp"
