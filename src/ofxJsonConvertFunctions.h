@@ -9,12 +9,9 @@
 
 #include "ofMain.h"
 #include "json_compatible.h"
-#include "../libs/bbb/json/utils/convert.hpp"
 
-namespace ofx {
-    namespace JsonUtils {
-        using bbb::json_utils::convert;
-        
+namespace bbb {
+    namespace json_utils {
         namespace detail {
             template <typename T>
             class has_toJson {
@@ -28,14 +25,14 @@ namespace ofx {
                 static std::false_type Test(...);
                 
             public:
-                static bool const value = decltype(Test<T>(0))::value;
+                static constexpr bool value = decltype(Test<T>(nullptr))::value;
             };
         };
         
         template <typename T>
         static inline auto convert(T &value)
-        -> typename std::enable_if<JsonUtils::detail::has_toJson<T>::value, ofJson>::type {
-            return value.to_json();
+        -> typename std::enable_if<json_utils::detail::has_toJson<T>::value, ofJson>::type {
+            return value.toJson();
         }
 
         static inline ofJson convert(const ofVec2f &v) {
@@ -91,3 +88,9 @@ namespace ofx {
         }
     };
 };
+
+namespace ofx {
+    namespace JsonUtils = bbb::json_utils;
+};
+
+#include "../libs/bbb/json/utils/convert.hpp"

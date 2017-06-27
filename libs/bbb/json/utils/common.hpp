@@ -16,6 +16,7 @@
 #include <type_traits>
 
 #include "../libs/nlohmann_json/src/json.hpp"
+#include "./constants.hpp"
 
 namespace bbb {
     using json = nlohmann::json;

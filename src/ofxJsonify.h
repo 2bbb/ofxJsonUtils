@@ -15,8 +15,8 @@
 
 #include "ofxJsonUtils.h"
 
-namespace ofx {
-    namespace JsonUtils {
+namespace bbb {
+    namespace json_utils {
         template <typename Base>
         struct Jsonify {
         public:
@@ -26,11 +26,11 @@ namespace ofx {
                     ofLogWarning("ofxJsonUtils::loadFromJsonFile") << file_path << " isn't exists";
                     return false;
                 }
-                parse(JsonUtils::loadFromFile(path, isInDataDir), static_cast<Base &>(*this));
+                parse(json_utils::loadFromFile(path, isInDataDir), static_cast<Base &>(*this));
                 return true;
             }
             void loadFromJsonString(const std::string &json_str) {
-                parse(JsonUtils::parse(json_str), static_cast<Base &>(*this));
+                parse(json_utils::parse(json_str), static_cast<Base &>(*this));
             }
             
             inline operator ofJson() const { return toJson(); }
@@ -54,6 +54,6 @@ namespace ofx {
 }
 
 template <typename Base>
-using ofxJsonify = ofx::JsonUtils::Jsonify<Base>;
+using ofxJsonify = bbb::json_utils::Jsonify<Base>;
 
 #endif /* ofxJsonify_h */

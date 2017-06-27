@@ -8,18 +8,14 @@
 #pragma once
 
 #include "ofMain.h"
+
 #include "ofxJsonConvertFunctions.h"
 #include "ofxJsonParseFunctions.h"
+
 #include "../libs/bbb/json.hpp"
 
-namespace ofx {
-    namespace JsonUtils {
-        using bbb::json_utils::parse;
-        using bbb::json_utils::parse_ndjson;
-        using bbb::json_utils::create;
-        using bbb::json_utils::load;
-        
-        
+namespace bbb {
+    namespace json_utils {
         static inline ofJson loadFromFile(const std::string &path, bool isInDataDir = true) {
             const ofBuffer buffer = ofBufferFromFile(isInDataDir ? ofToDataPath(path, true) : path);
             if(buffer.size() == 0) {
@@ -70,6 +66,6 @@ namespace ofx {
 };
 
 #include "ofxJsonify.h"
-namespace ofxJsonUtils = ofx::JsonUtils;
+namespace ofxJsonUtils = bbb::json_utils;
 
 #define kv(name) #name, name
