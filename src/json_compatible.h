@@ -9,4 +9,4 @@
 
 #include "../libs/bbb/json/utils/common.hpp"
 
-using ofJson = nlohmann::json;
+using ofJson = bbb::json;
