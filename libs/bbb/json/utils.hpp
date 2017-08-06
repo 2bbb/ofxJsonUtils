@@ -8,6 +8,7 @@
 #ifndef bbb_json_utils_hpp
 #define bbb_json_utils_hpp
 
+#include "./utils/common.hpp"
 #include "./utils/parse.hpp"
 #include "./utils/convert.hpp"
 #include "./utils/utility.hpp"

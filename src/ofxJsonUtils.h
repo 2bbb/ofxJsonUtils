@@ -13,6 +13,7 @@
 #include "ofxJsonParseFunctions.h"
 
 #include "../libs/bbb/json.hpp"
+#include "json_compatible.h"
 
 namespace bbb {
     namespace json_utils {
@@ -61,6 +62,38 @@ namespace bbb {
         static inline bool ofxJsonToFile(const std::string &path, const ofJson &json, bool isInDataDir, int indent)
         {
             return writeToFile(path, json, isInDataDir, indent);
+        }
+        
+        static inline bool hasKey(const ofJson &json, const std::string &key) {
+            return json.find(key) != json.end();
+        }
+        
+        struct key_not_found_exception : public std::exception {
+            key_not_found_exception(const std::string &message)
+                : message(message) {}
+            const std::string message;
+            virtual const char* what() const noexcept override {
+                return message.c_str();
+            }
+        };
+        
+        static inline void validationAssert(const ofJson &json,
+                                            const std::string &key)
+            throw(key_not_found_exception)
+        {
+            if(hasKey(json, key)) {
+                throw key_not_found_exception("json: \"" + key + "\" is not exists.");
+            }
+        }
+        
+        template <typename ... key_types>
+        static inline void validationAssert(const ofJson &json,
+                                            const std::string &key,
+                                            key_types && ... keys)
+        throw(key_not_found_exception)
+        {
+            validationAssert(json, key);
+            validationAssert(json, std::forward<key_types>(keys) ...);
         }
     };
 };
