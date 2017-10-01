@@ -34,7 +34,16 @@ namespace bbb {
         -> typename std::enable_if<json_utils::detail::has_toJson<T>::value, ofJson>::type {
             return value.toJson();
         }
+<<<<<<< HEAD
 
+=======
+        
+        template <typename T>
+        ofJson inline convert(std::shared_ptr<T> ptr) {
+            return ptr ? convert(*ptr) : ofJson();
+        }
+        
+>>>>>>> master
         static inline ofJson convert(const ofVec2f &v) {
             return {
                 { "x", v.x },
@@ -86,6 +95,63 @@ namespace bbb {
                 { "a", c.a }
             };
         }
+<<<<<<< HEAD
+=======
+        
+        template <typename T, typename Alloc>
+        static inline ofJson convert(const std::deque<T, Alloc> &vec);
+        template <typename T, std::size_t size>
+        static inline ofJson convert(const std::array<T, size> &arr);
+        template <typename T, typename Comp, typename Alloc>
+        static inline ofJson convert(std::map<std::string, T, Comp, Alloc> &table);
+        
+        template <typename T, typename Alloc>
+        static inline ofJson convert(const std::vector<T, Alloc> &vec) {
+            std::vector<ofJson> json_vec;
+            json_vec.resize(vec.size());
+            
+            for(std::size_t i = 0; i < vec.size(); ++i) {
+                json_vec[i] = convert(vec[i]);
+            }
+            
+            return json_vec;
+        }
+        
+        template <typename T, typename Alloc>
+        static inline ofJson convert(const std::deque<T, Alloc> &vec) {
+            std::vector<ofJson> json_vec;
+            json_vec.resize(vec.size());
+            
+            for(std::size_t i = 0; i < vec.size(); ++i) {
+                json_vec[i] = convert(vec[i]);
+            }
+            
+            return json_vec;
+        }
+
+        template <typename T, std::size_t size>
+        static inline ofJson convert(const std::array<T, size> &arr) {
+            std::vector<ofJson> json_vec;
+            json_vec.resize(size);
+            
+            for(std::size_t i = 0; i < size; ++i) {
+                json_vec[i] = convert(arr[i]);
+            }
+            
+            return json_vec;
+        }
+
+        template <typename T, typename Comp, typename Alloc>
+        static inline ofJson convert(std::map<std::string, T, Comp, Alloc> &table) {
+            std::map<std::string, ofJson> json_map;
+            
+            for(auto it = table.cbegin(); it != table.cend(); ++it) {
+                json_map.emplace(it.first, std::move(convert(it.second)));
+            }
+            
+            return json_map;
+        }
+>>>>>>> master
     };
 };
 
