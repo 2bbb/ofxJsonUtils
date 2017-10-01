@@ -8,7 +8,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "json_compatible.h"
+#include "ofJson_compatible.h"
 
 namespace bbb {
     namespace json_utils {
