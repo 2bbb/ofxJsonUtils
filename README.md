@@ -12,13 +12,13 @@ utilities for `ofJson`
 ### void parse(const ofJson &json, T &value)
 
 * allowed type
+  * ofJson (a.k.a. nlohmann::json)
   * arithmetic type (i.e., int, float, ...)
   * std::string
   * ofVecNf
   * ofRectangle
   * ofColor_<PixelType>
   * class has toJson / loadJson
-
 ### ofJson create(std::string key, T &value, [...])
 
 * utility for custom class
@@ -28,6 +28,17 @@ utilities for `ofJson`
 * utility for custom class
 
 ## Update history
+
+### 2017/10/01 ver 0.1.0 release
+
+* big refactor
+* add NDJson support
+* add of0.10 API
+  * ofLoadJson
+  * ofSaveJson
+  * ofSavePrettyJson
+  * ofSerialize
+  * ofDeserialize
 
 ### 2017/03/05 ver 0.0.3 release
 
@@ -57,3 +68,7 @@ MIT License.
 
 Please create a new issue if there is a problem.
 And please throw a pull request if you have a cool idea!!
+
+If you get happy with using this addon, and you're rich, please donation for support continuous development.
+
+Bitcoin: `17AbtW73aydfYH3epP8T3UDmmDCcXSGcaf`
