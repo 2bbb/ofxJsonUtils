@@ -17,7 +17,7 @@
 
 namespace bbb {
     namespace json_utils {
-        static inline ofJson loadFromFile(const std::string &path, bool isInDataDir) {
+        static inline ofJson loadFromFile(const std::string &path, bool isInDataDir = true) {
             const ofBuffer buffer = ofBufferFromFile(isInDataDir ? ofToDataPath(path, true) : path);
             if(buffer.size() == 0) {
                 ofLogWarning("ofxJsonUtils") << path << " not found or empty file";
