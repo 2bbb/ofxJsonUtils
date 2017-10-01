@@ -40,6 +40,7 @@ utilities for `ofJson`
 ## Special Thanks
 
 * [TOMOTO Yusuke](https://github.com/yusuketomoto)
+* [Naoto HIÉDA](https://github.com/micuat)
 * [nariakiiwatani](https://github.com/nariakiiwatani)
 * [yumetodo](https://github.com/yumetodo)
 
