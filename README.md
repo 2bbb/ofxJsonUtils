@@ -12,13 +12,13 @@ utilities for `ofJson`
 ### void parse(const ofJson &json, T &value)
 
 * allowed type
-	* arithmetic type (i.e., int, float, ...)
-	* std::string
-	* ofVecNf
-	* ofRectangle
-	* ofColor_<PixelType>
-	* class has toJson / loadJson
-	
+  * arithmetic type (i.e., int, float, ...)
+  * std::string
+  * ofVecNf
+  * ofRectangle
+  * ofColor_<PixelType>
+  * class has toJson / loadJson
+
 ### ofJson create(std::string key, T &value, [...])
 
 * utility for custom class
@@ -40,6 +40,7 @@ utilities for `ofJson`
 ## Special Thanks
 
 * [TOMOTO Yusuke](https://github.com/yusuketomoto)
+* [nariakiiwatani](https://github.com/nariakiiwatani)
 * [yumetodo](https://github.com/yumetodo)
 
 ## License

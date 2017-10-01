@@ -30,7 +30,11 @@ namespace bbb {
                 std::cerr << "[" << header << "] " << error_str << std::endl;
             }
         };
-
+        
+        static const inline void parse(const bbb::json &src, bbb::json &dst) {
+            dst = src;
+        }
+        
         static inline void parse(const bbb::json &json, std::string &value) {
             if(!json.is_string()) {
                 detail::print_parse_error("bbb::json_utils::parse string",  skip_json_isnt_string);
