@@ -28,7 +28,11 @@ namespace bbb {
                 static bool const value = decltype(test<type>(nullptr))::value;
             };
         };
-
+        
+        static inline const bbb::json &convert(const bbb::json &json) {
+            return json;
+        }
+        
         static inline const std::string &convert(const std::string &str) {
             return str;
         }
