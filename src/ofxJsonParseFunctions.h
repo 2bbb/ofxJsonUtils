@@ -8,7 +8,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "json_compatible.h"
+#include "ofJson_compatible.h"
 #include "../libs/bbb/json/utils/constants.hpp"
 
 namespace bbb {
@@ -145,11 +145,17 @@ namespace bbb {
         static inline void parse(const ofJson &json, ofColor_<PixelType> &c) {
             if(json.is_object()) {
                 auto end = json.end();
-                if(!json_utils::detail::has_keys(json, {"r", "g", "b"})) return ofLogVerbose("ofxJsonUtils::parse ofColor") << skip_invalid_format;
+                if(!json_utils::detail::has_keys(json, {"r", "g", "b"})) {
+                    ofLogVerbose("ofxJsonUtils::parse ofColor") << skip_invalid_format;
+                    return;
+                }
                 c.set(json["r"], json["g"], json["b"]);
                 if(json.find("a") != json.end()) c.a = json["a"];
             } else if(json.is_array()) {
-                if(json.size() < 3) return ofLogVerbose("ofxJsonUtils::parse ofColor") << skip_invalid_format;
+                if(json.size() < 3) {
+                    ofLogVerbose("ofxJsonUtils::parse ofColor") << skip_invalid_format;
+                    return;
+                }
                 c.set(json[0], json[1], json[2]);
                 if(3 < json.size()) c.a = json[3];
             } else {

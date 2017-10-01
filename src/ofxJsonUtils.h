@@ -13,11 +13,11 @@
 #include "ofxJsonParseFunctions.h"
 
 #include "../libs/bbb/json.hpp"
-#include "json_compatible.h"
+#include "ofJson_compatible.h"
 
 namespace bbb {
     namespace json_utils {
-        static inline ofJson loadFromFile(const std::string &path, bool isInDataDir = true) {
+        static inline ofJson loadFromFile(const std::string &path, bool isInDataDir) {
             const ofBuffer buffer = ofBufferFromFile(isInDataDir ? ofToDataPath(path, true) : path);
             if(buffer.size() == 0) {
                 ofLogWarning("ofxJsonUtils") << path << " not found or empty file";
@@ -81,7 +81,7 @@ namespace bbb {
                                             const std::string &key)
             throw(key_not_found_exception)
         {
-            if(hasKey(json, key)) {
+            if(!hasKey(json, key)) {
                 throw key_not_found_exception("json: \"" + key + "\" is not exists.");
             }
         }
