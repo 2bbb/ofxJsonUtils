@@ -26,7 +26,7 @@ namespace bbb {
                 static bool const value = decltype(test<type>(0))::value;
             };
             
-            void print_parse_error(const char * const header, const char * const error_str) {
+            static inline void print_parse_error(const char * const header, const char * const error_str) {
                 std::cerr << "[" << header << "] " << error_str << std::endl;
             }
         };
