@@ -13,19 +13,12 @@
 namespace bbb {
     namespace json_utils {
         namespace detail {
-            template <typename type>
-            class is_json_loadable {
-            private:
-                template <typename testee, testee> struct really_has;
-                template <typename checkee>
-                static std::true_type test(really_has<void (checkee::*)(const bbb::json &), &checkee::load> *);
-                template <typename>
-                static std::false_type test(...);
-                
-            public:
-                static bool const value = decltype(test<type>(0))::value;
-            };
+            template <typename checkee>
+            using has_load_op = typename std::enable_if<std::is_same<void, decltype(std::declval<checkee>().load(std::declval<const ofJson &>()))>::value>::type;
             
+            template <typename type>
+            using is_json_loadable = is_detected<has_load_op, type>;
+
             static inline void print_parse_error(const char * const header, const char * const error_str) {
                 std::cerr << "[" << header << "] " << error_str << std::endl;
             }
