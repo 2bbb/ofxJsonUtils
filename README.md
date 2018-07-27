@@ -93,8 +93,8 @@ MIT License.
 
 ## Author
 
-* ISHII 2bit [bufferRenaiss co., ltd.]
-* ishii[at]buffer-renaiss.com
+* ISHII 2bit
+* i[at]2bit.jp
 
 ## At the last
 
