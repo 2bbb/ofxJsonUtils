@@ -5,8 +5,8 @@
 //
 //
 
-#ifndef constants_h
-#define constants_h
+#ifndef constants_hpp
+#define constants_hpp
 
 namespace bbb {
     namespace json_utils {
@@ -20,4 +20,4 @@ namespace bbb {
     };
 };
 
-#endif /* constants_h */
+#endif /* constants_hpp */

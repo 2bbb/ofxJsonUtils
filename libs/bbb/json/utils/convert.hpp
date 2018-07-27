@@ -13,20 +13,11 @@
 namespace bbb {
     namespace json_utils {
         namespace detail {
+            template <typename checkee>
+            using has_to_json_op = typename std::enable_if<std::is_same<ofJson, decltype(std::declval<checkee>().to_json())>::value>::type;
+            
             template <typename type>
-            class is_json_encodable {
-            private:
-                template <typename testee, testee> struct really_has;
-                template <typename checkee>
-                static std::true_type test(really_has<bbb::json (checkee::*)() const, &checkee::to_json> *);
-                template <typename checkee>
-                static std::true_type test(really_has<bbb::json (checkee::*)(), &checkee::to_json> *);
-                template <typename>
-                static std::false_type test(...);
-                
-            public:
-                static bool const value = decltype(test<type>(nullptr))::value;
-            };
+            using is_json_encodable = is_detected<has_to_json_op, type>;
         };
         
         static inline const bbb::json &convert(const bbb::json &json) {

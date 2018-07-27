@@ -10,22 +10,16 @@
 #include "ofMain.h"
 #include "ofJson_compatible.h"
 #include "../libs/bbb/json/utils/constants.hpp"
+#include "../libs/bbb/json/utils/type_traits.hpp"
 
 namespace bbb {
     namespace json_utils {
         namespace detail {
-            template <typename T>
-            class has_loadJson {
-            private:
-                template <typename U, U> struct really_has;
-                template <typename C>
-                static std::true_type Test(really_has<void (C::*)(const ofJson &), &C::loadJson> *);
-                template <typename>
-                static std::false_type Test(...);
-                
-            public:
-                static constexpr bool value = decltype(Test<T>(nullptr))::value;
-            };
+            template <typename checkee>
+            using has_loadJson_op = typename std::enable_if<std::is_same<void, decltype(std::declval<checkee>().loadJson(std::declval<const ofJson &>()))>::value>::type;
+            
+            template <typename type>
+            using has_loadJson = is_detected<has_loadJson_op, type>;
             
             static bool has_keys(const ofJson &json, const std::vector<std::string> &keys) {
                 auto end = json.end();
