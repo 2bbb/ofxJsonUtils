@@ -9,28 +9,20 @@
 
 #include "ofMain.h"
 #include "ofJson_compatible.h"
+#include "../libs/bbb/json/utils/type_traits.hpp"
 
 namespace bbb {
     namespace json_utils {
         namespace detail {
-            template <typename T>
-            class has_toJson {
-            private:
-                template <typename U, U> struct really_has;
-                template <typename C>
-                static std::true_type Test(really_has<ofJson (C::*)() const, &C::toJson> *);
-                template <typename C>
-                static std::true_type Test(really_has<ofJson (C::*)(), &C::toJson> *);
-                template <typename>
-                static std::false_type Test(...);
-                
-            public:
-                static constexpr bool value = decltype(Test<T>(nullptr))::value;
-            };
+            template <typename checkee>
+            using has_toJson_op = typename std::enable_if<std::is_same<ofJson, decltype(std::declval<checkee>().toJson())>::value>::type;
+            
+            template <typename type>
+            using has_toJson = is_detected<has_toJson_op, type>;
         };
-        
+
         template <typename T>
-        static inline auto convert(T &value)
+        static inline auto convert(const T &value)
         -> typename std::enable_if<json_utils::detail::has_toJson<T>::value, ofJson>::type {
             return value.toJson();
         }
