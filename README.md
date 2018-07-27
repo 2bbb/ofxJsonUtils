@@ -82,10 +82,10 @@ SOFTWARE.
 
 ## Special Thanks
 
-* [TOMOTO Yusuke](https://github.com/yusuketomoto)
-* [Naoto HIÉDA](https://github.com/micuat)
-* [nariakiiwatani](https://github.com/nariakiiwatani)
-* [yumetodo](https://github.com/yumetodo)
+* [TOMOTO Yusuke](https://github.com/yusuketomoto) (#1, #2, #3, #5)
+* [Naoto HIÉDA](https://github.com/micuat) (#6)
+* [nariakiiwatani](https://github.com/nariakiiwatani) (#7, #8, [ofxJsonUtilsUtils](https://github.com/nariakiiwatani/ofxJsonUtilsUtils))
+* [yumetodo](https://github.com/yumetodo) (#4)
 
 ## License
 
