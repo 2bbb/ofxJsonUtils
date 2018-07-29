@@ -61,6 +61,11 @@ SOFTWARE.
 
 ## Update history
 
+### 2018/07/29 ver 0.1.1 release
+
+* refactor
+* add parse / convert about `glm`
+
 ### 2017/10/01 ver 0.1.0 release
 
 * big refactor
