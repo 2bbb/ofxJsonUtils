@@ -14,7 +14,7 @@ namespace bbb {
     namespace json_utils {
         namespace detail {
             template <typename checkee>
-            using has_load_op = typename std::enable_if<std::is_same<void, decltype(std::declval<checkee>().load(std::declval<const ofJson &>()))>::value>::type;
+            using has_load_op = typename std::enable_if<std::is_same<void, decltype(std::declval<checkee>().load(std::declval<const bbb::json &>()))>::value>::type;
             
             template <typename type>
             using is_json_loadable = is_detected<has_load_op, type>;

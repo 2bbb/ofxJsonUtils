@@ -7,20 +7,13 @@
 
 #pragma once
 
-#include "ofMain.h"
-#include "ofJson_compatible.h"
 #include "../libs/bbb/json/utils/type_traits.hpp"
+
+#include "ofxJsonUtilsCommon.h"
+#include "ofxJsonUtilsTypeTraits.h"
 
 namespace bbb {
     namespace json_utils {
-        namespace detail {
-            template <typename checkee>
-            using has_toJson_op = typename std::enable_if<std::is_same<ofJson, decltype(std::declval<checkee>().toJson())>::value>::type;
-            
-            template <typename type>
-            using has_toJson = is_detected<has_toJson_op, type>;
-        };
-
         template <typename T>
         static inline auto convert(const T &value)
         -> typename std::enable_if<json_utils::detail::has_toJson<T>::value, ofJson>::type {
@@ -68,6 +61,15 @@ namespace bbb {
             };
         }
         
+        static inline ofJson convert(const ofQuaternion &v) {
+            return {
+                { "x", v.x() },
+                { "y", v.y() },
+                { "z", v.z() },
+                { "w", v.w() }
+            };
+        }
+
         template <typename PixelType>
         static inline ofJson convert(const ofColor_<PixelType> &c) {
             return {
@@ -77,6 +79,69 @@ namespace bbb {
                 { "a", c.a }
             };
         }
+        
+#pragma mark glm
+#ifdef GLM_VERSION
+        template <typename glm_vec_t>
+        inline auto convert(const glm_vec_t &v)
+            -> bbb::json_utils::enable_if_t<is_vec_and_is_size<glm_vec_t, 1>(), ofJson>
+        {
+            return {
+                { "x", v.x },
+            };
+        }
+        template <typename glm_vec_t>
+        inline auto convert(const glm_vec_t &v)
+            -> bbb::json_utils::enable_if_t<is_vec_and_is_size<glm_vec_t, 2>(), ofJson>
+        {
+            return {
+                { "x", v.x },
+                { "y", v.y },
+            };
+        }
+        template <typename glm_vec_t>
+        inline auto convert(const glm_vec_t &v)
+            -> bbb::json_utils::enable_if_t<is_vec_and_is_size<glm_vec_t, 3>(), ofJson>
+        {
+            return {
+                { "x", v.x },
+                { "y", v.y },
+                { "z", v.z },
+            };
+        }
+        template <typename glm_vec_t>
+        inline auto convert(const glm_vec_t &v)
+            -> bbb::json_utils::enable_if_t<is_vec_and_is_size<glm_vec_t, 4>(), ofJson>
+        {
+            return {
+                { "x", v.x },
+                { "y", v.y },
+                { "z", v.z },
+                { "w", v.w },
+            };
+        }
+
+        template <typename glm_mat_t>
+        inline auto convert(const glm_mat_t &v)
+            -> bbb::json_utils::enable_if_t<is_glm_mat<glm_mat_t>::value, ofJson>
+        {
+            ofJson json;
+            for(std::size_t i = 0; i < v.length(); ++i) {
+                json[ofVAArgsToString("value%d", i)] = convert(v[i]);
+            }
+            return json;
+        }
+        
+        template <typename T, glm::precision P>
+        inline ofJson convert(const glm::tquat<T, P> &v) {
+            return {
+                { "x", v.x },
+                { "y", v.y },
+                { "z", v.z },
+                { "w", v.w },
+            };
+        }
+#endif // GLM_VERSION
     };
 };
 

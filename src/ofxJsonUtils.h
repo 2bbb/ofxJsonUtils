@@ -7,12 +7,12 @@
 
 #pragma once
 
-#include "ofMain.h"
+#include "ofxJsonUtilsCommon.h"
 
 #include "ofxJsonConvertFunctions.h"
 #include "ofxJsonParseFunctions.h"
 
-#include "../libs/bbb/json.hpp"
+#include "../libs/bbb/bbb_json.hpp"
 #include "ofJson_compatible.h"
 
 namespace bbb {

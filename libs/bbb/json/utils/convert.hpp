@@ -14,7 +14,7 @@ namespace bbb {
     namespace json_utils {
         namespace detail {
             template <typename checkee>
-            using has_to_json_op = typename std::enable_if<std::is_same<ofJson, decltype(std::declval<checkee>().to_json())>::value>::type;
+            using has_to_json_op = typename std::enable_if<std::is_same<bbb::json, decltype(std::declval<checkee>().to_json())>::value>::type;
             
             template <typename type>
             using is_json_encodable = is_detected<has_to_json_op, type>;
