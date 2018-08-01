@@ -22,6 +22,12 @@ namespace bbb {
             static inline void print_parse_error(const char * const header, const char * const error_str) {
                 std::cerr << "[" << header << "] " << error_str << std::endl;
             }
+            
+            template <typename checkee>
+            using is_parsable_op = decltype(parse(std::declval<bbb::json>(), std::declval<checkee &>()));;
+            
+            template <typename checkee>
+            using is_parsable = is_detected<is_parsable_op, checkee>;
         };
         
         static const inline void parse(const bbb::json &src, bbb::json &dst) {
@@ -110,7 +116,8 @@ namespace bbb {
         }
         
         template <typename type, typename comp, typename alloc>
-        static inline void parse(const bbb::json &json, std::map<std::string, type, comp, alloc> &table) {
+        static inline void parse(const bbb::json &json, std::map<std::string, type, comp, alloc> &table)
+        {
             if(!json.is_object()) {
                 detail::print_parse_error("bbb::json_utils::parse map", skip_json_isnt_object);
                 return;
@@ -124,5 +131,12 @@ namespace bbb {
         }
     };
 };
+
+template <typename type>
+auto from_json(const bbb::json &j, type &p)
+    -> typename std::enable_if<bbb::json_utils::detail::is_parsable<type>::value>::type
+{
+    bbb::json_utils::parse(j, p);
+}
 
 #endif /* bbb_json_utils_parse_hpp */

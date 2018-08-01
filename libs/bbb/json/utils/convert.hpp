@@ -18,6 +18,12 @@ namespace bbb {
             
             template <typename type>
             using is_json_encodable = is_detected<has_to_json_op, type>;
+            
+            template <typename checkee>
+            using is_convertible_op = decltype(convert(std::declval<checkee &>()));
+            
+            template <typename checkee>
+            using is_convertible = is_detected<is_convertible_op, checkee>;
         };
         
         static inline const bbb::json &convert(const bbb::json &json) {
@@ -90,7 +96,8 @@ namespace bbb {
         }
         
         template <typename type, typename comp, typename alloc>
-        static inline bbb::json convert(std::map<std::string, type, comp, alloc> &table) {
+        static inline bbb::json convert(std::map<std::string, type, comp, alloc> &table)
+        {
             std::map<std::string, bbb::json> json_map;
             
             for(auto it = table.cbegin(); it != table.cend(); ++it) {
@@ -101,5 +108,12 @@ namespace bbb {
         }
     };
 };
+
+template <typename type>
+auto to_json(bbb::json &j, const type &p)
+    -> typename std::enable_if<bbb::json_utils::detail::is_convertible<type>::value>::type
+{
+    j = bbb::json_utils::convert(p);
+}
 
 #endif /* bbb_json_utils_convert_hpp */

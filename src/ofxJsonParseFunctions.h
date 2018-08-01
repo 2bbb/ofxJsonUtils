@@ -341,3 +341,16 @@ namespace bbb {
         }
     };
 }
+
+#ifdef GLM_VERSION
+
+namespace glm {
+    template <typename type>
+    auto from_json(const bbb::json &j, type &p)
+        -> typename std::enable_if<bbb::json_utils::detail::is_parsable<type>::value>::type
+    {
+        bbb::json_utils::parse(j, p);
+    }
+}
+
+#endif

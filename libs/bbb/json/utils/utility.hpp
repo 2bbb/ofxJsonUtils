@@ -40,8 +40,9 @@ namespace bbb {
         
         template <typename type, typename ... others>
         static inline auto create(const std::string &key, const type &value, const others & ... args)
-        -> typename std::enable_if<2 <= sizeof...(others) && sizeof...(others) % 2 == 0, bbb::json>::type {
-            bbb::json json = std::move(create(args ...));
+        -> typename std::enable_if<2 <= sizeof...(others) && sizeof...(others) % 2 == 0, bbb::json>::type
+        {
+            bbb::json json = create(args ...);
             json[key] = convert(value);
             return json;
         }

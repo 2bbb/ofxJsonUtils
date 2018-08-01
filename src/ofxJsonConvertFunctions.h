@@ -166,3 +166,16 @@ namespace bbb {
         }
     };
 };
+
+#ifdef GLM_VERSION
+
+namespace glm {
+    template <typename type>
+    auto to_json(ofJson &j, const type &p)
+        -> typename std::enable_if<bbb::json_utils::detail::is_convertible<type>::value>::type
+    {
+        j = bbb::json_utils::convert(p);
+    }
+};
+
+#endif
