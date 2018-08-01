@@ -94,7 +94,7 @@ namespace bbb {
             std::map<std::string, bbb::json> json_map;
             
             for(auto it = table.cbegin(); it != table.cend(); ++it) {
-                json_map.emplace(it.first, std::move(convert(it.second)));
+                json_map.emplace(it->first, std::move(convert(it->second)));
             }
             
             return json_map;
