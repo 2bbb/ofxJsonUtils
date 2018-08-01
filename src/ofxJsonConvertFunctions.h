@@ -149,6 +149,14 @@ namespace bbb {
 
         template <typename type>
         inline ofJson convert(const ofParameter<type> &v);
+        
+        inline ofJson convert(const ofParameterGroup &v)
+        {
+            ofJson j;
+#pragma mark so dirty!!
+            ofSerialize(j, *const_cast<ofParameterGroup *>(&v));
+            return j;
+        }
     };
 };
 

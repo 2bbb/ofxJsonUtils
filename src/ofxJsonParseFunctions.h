@@ -322,6 +322,10 @@ namespace bbb {
 
         template <typename type>
         inline void parse(const ofJson &json, ofParameter<type> &v);
+        
+        inline void parse(const ofJson &json, ofParameterGroup &v) {
+            ofDeserialize(json, v);
+        }
     };
 };
 
