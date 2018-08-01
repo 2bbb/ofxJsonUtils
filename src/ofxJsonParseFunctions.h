@@ -292,7 +292,7 @@ namespace bbb {
         }
         
         template <typename T, glm::precision P>
-        inline ofJson parse(const ofJson &json, glm::tquat<T, P> &v) {
+        inline void parse(const ofJson &json, glm::tquat<T, P> &v) {
             if(json.is_object()) {
                 auto end = json.end();
                 if(!json_utils::detail::has_keys(json, {"x", "y", "z", "w"})) {
