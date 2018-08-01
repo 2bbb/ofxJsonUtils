@@ -4,9 +4,17 @@ utilities for `ofJson`
 
 ## API
 
-### ofJson loadFromFile(const std::string &path, bool isInDataDir = true)
+### ofJson ofLoadJson (const std::filesystem::path& filename )
 
-* simple load
+* compatible to oF 0.10 
+
+### bool ofSaveJson(const std::filesystem::path& filename, const ofJson & json) 
+
+* compatible to oF 0.10 
+
+### bool ofSavePrettyJson(const std::filesystem::path& filename, const ofJson & json) 
+
+* compatible to oF 0.10 
 
 ### ofJson convert(const T &value)
 ### void parse(const ofJson &json, T &value)
@@ -16,9 +24,20 @@ utilities for `ofJson`
   * arithmetic type (i.e., int, float, ...)
   * std::string
   * ofVecNf
+  * ofMatrix4x4
+  * ofQuaternion
   * ofRectangle
-  * ofColor_<PixelType>
-  * class has toJson / loadJson
+  * ofColor_&lt;PixelType&gt;
+  * glm::vecN
+  * glm::matMxN
+  * glm::quat 
+  * std::vector&lt;allowed type&gt;
+  * std::array&lt;allowed type, N&gt;
+  * std::deque&lt;allowed type&gt;
+  * std::map&lt;std::string, allowed type&gt;
+  * ofParameter&lt;allowed type&gt;
+  * ofParameterGroup
+  * custom class has toJson / loadJson
 ### ofJson create(std::string key, T &value, [...])
 
 * utility for custom class
