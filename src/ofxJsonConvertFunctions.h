@@ -142,6 +142,13 @@ namespace bbb {
             };
         }
 #endif // GLM_VERSION
+        
+        inline ofJson convert(const ofParameter<void> &v) {
+            return ofJson();
+        }
+
+        template <typename type>
+        inline ofJson convert(const ofParameter<type> &v);
     };
 };
 
@@ -150,3 +157,12 @@ namespace ofx {
 };
 
 #include "../libs/bbb/json/utils/convert.hpp"
+
+namespace bbb {
+    namespace json_utils {
+        template <typename type>
+        inline ofJson convert(const ofParameter<type> &v) {
+            return convert(v.get());
+        }
+    };
+};

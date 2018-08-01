@@ -317,6 +317,11 @@ namespace bbb {
             }
         }
 #endif // GLM_VERSION
+        
+        inline void parse(const ofJson &json, ofParameter<void> &v) {}
+
+        template <typename type>
+        inline void parse(const ofJson &json, ofParameter<type> &v);
     };
 };
 
@@ -325,3 +330,14 @@ namespace ofx {
 };
 
 #include "../libs/bbb/json/utils/parse.hpp"
+
+namespace bbb {
+    namespace json_utils {
+        template <typename type>
+        inline void parse(const ofJson &json, ofParameter<type> &v) {
+            type v0;
+            parse(json, v0);
+            v.setWithoutEventNotifications(v0);
+        }
+    };
+}
