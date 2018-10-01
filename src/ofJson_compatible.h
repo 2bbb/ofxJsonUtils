@@ -9,6 +9,7 @@
 
 #include "../libs/bbb/json/utils/common.hpp"
 #include "ofConstants.h"
+#include "ofParameter.h"
 
 #if (OF_VERSION_MINOR < 10)
 
