@@ -84,7 +84,7 @@ namespace bbb {
 #ifdef GLM_VERSION
         template <typename glm_vec_t>
         inline auto convert(const glm_vec_t &v)
-            -> bbb::json_utils::enable_if_t<is_vec_and_is_size<glm_vec_t, 1>(), ofJson>
+            -> bbb::json_utils::enable_if_t<is_glm_vec<glm_vec_t>::value && get_glm_vec_size<glm_vec_t>::value == 1, ofJson>
         {
             return {
                 { "x", v.x },
@@ -92,7 +92,7 @@ namespace bbb {
         }
         template <typename glm_vec_t>
         inline auto convert(const glm_vec_t &v)
-            -> bbb::json_utils::enable_if_t<is_vec_and_is_size<glm_vec_t, 2>(), ofJson>
+            -> bbb::json_utils::enable_if_t<is_glm_vec<glm_vec_t>::value && get_glm_vec_size<glm_vec_t>::value == 2, ofJson>
         {
             return {
                 { "x", v.x },
@@ -101,7 +101,7 @@ namespace bbb {
         }
         template <typename glm_vec_t>
         inline auto convert(const glm_vec_t &v)
-            -> bbb::json_utils::enable_if_t<is_vec_and_is_size<glm_vec_t, 3>(), ofJson>
+            -> bbb::json_utils::enable_if_t<is_glm_vec<glm_vec_t>::value && get_glm_vec_size<glm_vec_t>::value == 3, ofJson>
         {
             return {
                 { "x", v.x },
@@ -111,7 +111,7 @@ namespace bbb {
         }
         template <typename glm_vec_t>
         inline auto convert(const glm_vec_t &v)
-            -> bbb::json_utils::enable_if_t<is_vec_and_is_size<glm_vec_t, 4>(), ofJson>
+            -> bbb::json_utils::enable_if_t<is_glm_vec<glm_vec_t>::value && get_glm_vec_size<glm_vec_t>::value == 4, ofJson>
         {
             return {
                 { "x", v.x },

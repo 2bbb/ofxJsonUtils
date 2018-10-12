@@ -167,7 +167,7 @@ namespace bbb {
 #ifdef GLM_VERSION
         template <typename glm_vec_t>
         inline auto parse(const ofJson &json, glm_vec_t &v)
-            -> bbb::json_utils::enable_if_t<is_vec_and_is_size<glm_vec_t, 1>()>
+            -> bbb::json_utils::enable_if_t<is_glm_vec<glm_vec_t>::value && get_glm_vec_size<glm_vec_t>::value == 1>
         {
             if(json.is_object()) {
                 auto end = json.end();
@@ -188,7 +188,7 @@ namespace bbb {
         }
         template <typename glm_vec_t>
         inline auto parse(const ofJson &json, glm_vec_t &v)
-            -> bbb::json_utils::enable_if_t<is_vec_and_is_size<glm_vec_t, 2>()>
+            -> bbb::json_utils::enable_if_t<is_glm_vec<glm_vec_t>::value && get_glm_vec_size<glm_vec_t>::value == 2>
         {
             if(json.is_object()) {
                 auto end = json.end();
@@ -211,7 +211,7 @@ namespace bbb {
         }
         template <typename glm_vec_t>
         inline auto parse(const ofJson &json, glm_vec_t &v)
-            -> bbb::json_utils::enable_if_t<is_vec_and_is_size<glm_vec_t, 3>()>
+            -> bbb::json_utils::enable_if_t<is_glm_vec<glm_vec_t>::value && get_glm_vec_size<glm_vec_t>::value == 3>
         {
             if(json.is_object()) {
                 auto end = json.end();
@@ -236,7 +236,7 @@ namespace bbb {
         }
         template <typename glm_vec_t>
         inline auto parse(const ofJson &json, glm_vec_t &v)
-            -> bbb::json_utils::enable_if_t<is_vec_and_is_size<glm_vec_t, 4>()>
+            -> bbb::json_utils::enable_if_t<is_glm_vec<glm_vec_t>::value && get_glm_vec_size<glm_vec_t>::value == 4>
         {
             if(json.is_object()) {
                 auto end = json.end();
