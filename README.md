@@ -110,7 +110,7 @@ SOFTWARE.
 * [Naoto HIÉDA](https://github.com/micuat) (#6)
 * [nariakiiwatani](https://github.com/nariakiiwatani) (#7, #8, [ofxJsonUtilsUtils](https://github.com/nariakiiwatani/ofxJsonUtilsUtils))
 * [yumetodo](https://github.com/yumetodo) (#4)
-
+* [moebiussurfing](https://github.com/moebiussurfing) (#11)
 ## License
 
 MIT License.
