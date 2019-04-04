@@ -39,7 +39,7 @@ namespace bbb {
                 detail::print_parse_error("bbb::json_utils::parse string",  skip_json_isnt_string);
                 return;
             }
-            value = json;
+            value = json.get<std::string>();
         }
         
         static inline void parse(const bbb::json &json, bool &value) {
