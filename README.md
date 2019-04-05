@@ -50,7 +50,7 @@ utilities for `ofJson`
 
 ### [nlohmann/json](https://github.com/nlohmann/json/)
 
-[v2.1.1](https://github.com/nlohmann/json/releases/tag/v2.1.1)
+[v3.6.1](https://github.com/nlohmann/json/releases/tag/v3.6.1)
 
 MIT License.
 
