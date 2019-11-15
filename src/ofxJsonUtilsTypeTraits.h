@@ -45,7 +45,7 @@ namespace bbb {
         template <typename>
         struct is_glm_vec : std::false_type {};
         template <typename>
-        struct get_glm_vec_size : std::integral_constant<std::size_t, 0> {};
+        struct get_glm_vec_size : std::integral_constant<glm::length_t, 0> {};
         template <typename>
         struct is_glm_mat : std::false_type {};
         
@@ -60,13 +60,13 @@ namespace bbb {
         struct is_glm_vec<glm::tvec4<T, Q>> : std::true_type {};
         
         template <typename T, glm::precision Q>
-        struct get_glm_vec_size<glm::tvec1<T, Q>> : std::integral_constant<std::size_t, 1> {};
+        struct get_glm_vec_size<glm::tvec1<T, Q>> : std::integral_constant<glm::length_t, 1> {};
         template <typename T, glm::precision Q>
-        struct get_glm_vec_size<glm::tvec2<T, Q>> : std::integral_constant<std::size_t, 2> {};
+        struct get_glm_vec_size<glm::tvec2<T, Q>> : std::integral_constant<glm::length_t, 2> {};
         template <typename T, glm::precision Q>
-        struct get_glm_vec_size<glm::tvec3<T, Q>> : std::integral_constant<std::size_t, 3> {};
+        struct get_glm_vec_size<glm::tvec3<T, Q>> : std::integral_constant<glm::length_t, 3> {};
         template <typename T, glm::precision Q>
-        struct get_glm_vec_size<glm::tvec4<T, Q>> : std::integral_constant<std::size_t, 4> {};
+        struct get_glm_vec_size<glm::tvec4<T, Q>> : std::integral_constant<glm::length_t, 4> {};
         
         template <typename T, glm::precision Q>
         struct is_glm_mat<glm::tmat2x2<T, Q>> : std::true_type {};
@@ -87,13 +87,13 @@ namespace bbb {
         template <typename T, glm::precision Q>
         struct is_glm_mat<glm::tmat4x4<T, Q>> : std::true_type {};
 #   else
-        template <std::size_t N, typename T, glm::qualifier Q>
+        template <glm::length_t N, typename T, glm::qualifier Q>
         struct is_glm_vec<glm::vec<N, T, Q>> : std::true_type {};
         
-        template <std::size_t N, typename T, glm::qualifier Q>
-        struct get_glm_vec_size<glm::vec<N, T, Q>> : std::integral_constant<std::size_t, N> {};
+        template <glm::length_t N, typename T, glm::qualifier Q>
+        struct get_glm_vec_size<glm::vec<N, T, Q>> : std::integral_constant<glm::length_t, N> {};
         
-        template <std::size_t M, std::size_t N, typename T, glm::qualifier Q>
+        template <glm::length_t M, glm::length_t N, typename T, glm::qualifier Q>
         struct is_glm_mat<glm::mat<M, N, T, Q>> : std::true_type {};
 #   endif
         
