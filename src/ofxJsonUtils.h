@@ -14,6 +14,7 @@
 
 #include "../libs/bbb/bbb_json.hpp"
 #include "ofJson_compatible.h"
+#include "ofxJsonUtilsConvertibleTypes.h"
 
 namespace bbb {
     namespace json_utils {
