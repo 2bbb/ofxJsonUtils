@@ -16,7 +16,31 @@ utilities for `ofJson`
 
 * compatible to oF 0.10 
 
+### ofJson ofxParse**Xxx**(const std::vector\<std::uint8_t\> &binary)
+
+* load **CONVERTIABLE_TYPE** binary to json.
+* ex. ofxParseBson, ofxParseMessagePack, etc... see below.
+
+### ofJson ofLoad**Xxx**(const std::filesystem::path &filename)
+
+* load **CONVERTIBLE_TYPE** binary file to json
+
+### std::vector\<std::uint8_t\> ofxConvertTo**Xxx**(const ofJson &json)
+
+* convert to **CONVERTIBLE_TYPE** binary from json
+
+### bool ofxSaveJsonAs**Xxx**(const std::filesystem::path &filename, const ofJson &json)
+
+* save json as **CONVERTIBLE_TYPE**
+
+#### **Xxx** : CONVERTIBLE_TYPE
+* `Bson`
+* `Cbor`
+* `MessagePack`
+* `UBJson`
+
 ### ofJson convert(const T &value)
+
 ### void parse(const ofJson &json, T &value)
 
 * allowed type
@@ -79,6 +103,11 @@ SOFTWARE.
 ```
 
 ## Update history
+
+### 2019/11/30 ver 0.2.0 release
+
+* update `nlohman::json` to v3.6.1
+* add load / parse / save about `BSON`, `CBOR`, `MessagePack`, `UBJSON`
 
 ### 2018/07/29 ver 0.1.1 release
 
