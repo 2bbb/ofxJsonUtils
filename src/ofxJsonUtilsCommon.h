@@ -13,6 +13,7 @@
 #include "ofRectangle.h"
 #include "ofFileUtils.h"
 #include "ofUtils.h"
+#include "ofJson.h"
 #include "ofJson_compatible.h"
 
 #endif /* ofxJsonUtilsCommon_h */

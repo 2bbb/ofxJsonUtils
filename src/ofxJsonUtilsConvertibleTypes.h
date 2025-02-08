@@ -28,6 +28,7 @@ inline std::vector<std::uint8_t> ofxLoadBinary(const std::filesystem::path &file
 template <typename type>
 inline bool ofxWriteVectorToFile(const std::vector<type> &vec, ofFile &file) {
     file.write((char *)&vec[0], vec.size());
+    return true;
 }
 
 inline ofJson ofxParseBson(const std::vector<std::uint8_t> &bson)
