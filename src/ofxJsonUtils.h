@@ -36,7 +36,7 @@ namespace bbb {
             }
             for(const auto &line : buffer.getLines()) {
                 if(line.empty()) continue;
-                jsons.emplace_back(std::move(ofJson::parse(line)));
+                jsons.emplace_back(ofJson::parse(line));
             }
             return jsons;
         }
